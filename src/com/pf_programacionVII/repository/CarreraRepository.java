@@ -44,7 +44,7 @@ public class CarreraRepository extends Repository<Carrera> {
 	}
 	
 	//siempre el objeto carrera tiene que traer su id
-	public void updatetCarrera(String procedureUpdateMateria, String procedureGetCarrera, Carrera carrera) {
+	public void updateCarrera(String procedureUpdateMateria, String procedureGetCarrera, Carrera carrera) {
 		ArrayList<Object> parameters = new ArrayList<>();
 		Carrera carreraServer = getCarreraById(procedureGetCarrera, carrera.getId());
 		setStoreProcedure(procedureUpdateMateria);

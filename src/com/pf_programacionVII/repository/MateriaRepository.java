@@ -44,7 +44,7 @@ public class MateriaRepository extends Repository<Materia> {
 	}
 	
 	//siempre tiene el objeto materia traer su id
-	public void updatetMateria(String procedureUpdateMateria, String procedureGetMateria, Materia materia) {
+	public void updateMateria(String procedureUpdateMateria, String procedureGetMateria, Materia materia) {
 		ArrayList<Object> parameters = new ArrayList<>();
 		Materia materiaServer = getMateriaById(procedureGetMateria, materia.getId());
 		setStoreProcedure(procedureUpdateMateria);
