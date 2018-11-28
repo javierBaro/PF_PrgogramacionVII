@@ -12,13 +12,12 @@ import com.pf_programacionVII.connection.ConnectionManager;
 
 public abstract class Repository<T> {
 
-	protected String storeProcedure;
-	protected HashMap<Object, String> hm = new HashMap<>();
-	protected ArrayList<Object> parameters = new ArrayList<>();
-	protected ConnectionManager conn = new ConnectionManager();
-	protected ArrayList<T> al = new ArrayList<>();
+	private String storeProcedure;
+	private ArrayList<Object> parameters = new ArrayList<>();
+	private ConnectionManager conn = new ConnectionManager();
+	private ArrayList<T> al = new ArrayList<>();
 	protected ResultSet rs;
-	protected CallableStatement stmt;
+	private CallableStatement stmt;
 
 	protected void stmtClose() {
 		if (stmt != null) {
@@ -108,6 +107,14 @@ public abstract class Repository<T> {
 	}
 	
 	protected void save() {
+		set();
+	}
+	
+	protected void delete() {
+		set();
+	}
+	
+	protected void set() {
 		try {
 			al.clear();
 			stmt = conn.conectarMySQL().prepareCall(storeProcedure);
@@ -122,21 +129,6 @@ public abstract class Repository<T> {
 		}
 	}
 	
-	protected void delete() {
-		try {
-			al.clear();
-			stmt = conn.conectarMySQL().prepareCall(storeProcedure);
-			setParameterForProcedure();
-			rs = stmt.executeQuery();	
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			resultSetClose();
-			stmtClose();
-			conn.cerrarMySQL();
-		}
-	}
-
 	public String getStoreProcedure() {
 		return storeProcedure;
 	}

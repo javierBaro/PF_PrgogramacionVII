@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pf_programacionVII.model.Carrera;
 import com.pf_programacionVII.model.User;
+import com.pf_programacionVII.service.CarreraServiceImpl;
 import com.pf_programacionVII.service.UserServiceImpl;
 
 @WebServlet("/User")
@@ -15,6 +17,7 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	UserServiceImpl userService = new UserServiceImpl();
+	CarreraServiceImpl carreraServiceImpl = new CarreraServiceImpl();
     public UserServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -28,35 +31,19 @@ public class UserServlet extends HttpServlet {
 				"<title>Insert title here</title>\n" + 
 				"</head>\n" + 
 				"<body>"
-				+ "<table>";
-		
-		for(User user: userService.getAllUsuarios())
-		{
+			    + "<table>";	
 			str+="<tr>";
-			str+="<td>"+user.getId()+"</td>";
-			str+="<td>"+user.getNombre()+"</td>";
-			str+="<td>"+user.getUsuario()+"</td>";
-			str+="<td>"+user.getContrasena()+"</td>";
-			str+="<td>"+user.getPlanStudioId()+"</td>";
-			str+="<td>"+user.getRolesId()+"</td>";
+			str+="<td>"+carreraServiceImpl.getCarreraByidCarrera(1).getNombre()+"</td>";
+			str+="<td>"+carreraServiceImpl.getCarreraByidCarrera(1).getId()+"</td>";
 			str+="</tr>";
-		}
-		
-		str+="<tr>";
-		str+="<td>"+userService.getUsuarioByUsuario("javier").getNombre()+"</td>";
-		str+="</tr>";
-		str+="</table>"
+		    str+="</table>"
 				+ "</body>\n" + 
 				"</html>";
-		userService.updateUser(null);
+
 		response.getWriter().append(str);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
