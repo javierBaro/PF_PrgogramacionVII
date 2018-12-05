@@ -71,6 +71,7 @@ public abstract class Repository<T> {
 			al.clear();
 			stmt = conn.conectarMySQL().prepareCall(storeProcedure);
 			setParameterForProcedure();
+			System.out.println(stmt);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				al.add(getObject());

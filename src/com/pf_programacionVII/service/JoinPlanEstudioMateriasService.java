@@ -8,7 +8,8 @@ import com.pf_programacionVII.model.PlanEstudio;
 public interface JoinPlanEstudioMateriasService {
 	public ArrayList<JoinPlanEstudioMaterias> getAllJoin() ;
 	public JoinPlanEstudioMaterias getJoinById(int idJoin);
-	public JoinPlanEstudioMaterias getJoinByidPlanEstudioMaterias(int idPlanEstudio);
+	public ArrayList<JoinPlanEstudioMaterias> getJoinByIdPrerequsitoAndIdPlanEstudio(int idPrerequisito,int idPlanEstudio);
+	public ArrayList<JoinPlanEstudioMaterias> getJoinByidPlanEstudio(int idPlanEstudio);
 	public void insertJoin(JoinPlanEstudioMaterias join);
 	public void updateJoin(JoinPlanEstudioMaterias join);
     public void deletePlanJoin(int idJoin);

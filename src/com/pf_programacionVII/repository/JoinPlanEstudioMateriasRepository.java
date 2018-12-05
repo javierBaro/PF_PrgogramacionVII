@@ -41,6 +41,23 @@ public class JoinPlanEstudioMateriasRepository extends Repository<JoinPlanEstudi
 	setParameters(parameters);
 	return getOne();
 	}
+	public ArrayList<JoinPlanEstudioMaterias> getJoinByIdPrerequisitoAndIdPlanEstudio(String procedure,int prerequisitoId,int planEstudioId )
+	{
+	setStoreProcedure(procedure);
+	ArrayList<Object> parameters=new ArrayList<>();
+	parameters.add((Integer)prerequisitoId);
+	parameters.add((Integer)planEstudioId);
+	setParameters(parameters);
+	return getMany();
+	}
+	public ArrayList<JoinPlanEstudioMaterias >getJoinByIdPlanEstudio(String procedure,int PlanEstudioId)
+	{
+	setStoreProcedure(procedure);
+	ArrayList<Object> parameters=new ArrayList<>();
+	parameters.add((Integer)PlanEstudioId);
+	setParameters(parameters);
+	return getMany();
+	}
 	
 	public void insertJoin(String procedure, JoinPlanEstudioMaterias join) {
 		setStoreProcedure(procedure);
