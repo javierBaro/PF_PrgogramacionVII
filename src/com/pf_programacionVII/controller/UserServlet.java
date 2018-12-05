@@ -18,6 +18,7 @@ public class UserServlet extends HttpServlet {
        
 	UserServiceImpl userService = new UserServiceImpl();
 	CarreraServiceImpl carreraServiceImpl = new CarreraServiceImpl();
+	String userinfo;
     public UserServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -35,6 +36,7 @@ public class UserServlet extends HttpServlet {
 			str+="<tr>";
 			str+="<td>"+carreraServiceImpl.getCarreraByidCarrera(1).getNombre()+"</td>";
 			str+="<td>"+carreraServiceImpl.getCarreraByidCarrera(1).getId()+"</td>";
+			str+="<td>"+userinfo+"</td>";
 			str+="</tr>";
 		    str+="</table>"
 				+ "</body>\n" + 
@@ -45,7 +47,7 @@ public class UserServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+		userinfo = userService.getUsuarioByUsuario(request.getParameter("login_name")).toString();
 		
 		doGet(request, response);
 	}

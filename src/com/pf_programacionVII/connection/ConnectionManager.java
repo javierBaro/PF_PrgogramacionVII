@@ -10,10 +10,10 @@ public class ConnectionManager {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 
 	// Nombre de la base de datos
-	private String database = "materias_u";
+	private String database = "materias_u"; 
 
 	// Host
-	private String hostname = "localhost";
+	private String hostname = "10.9.121.117";
 
 	// Puerto
 	private String port = "3306";
@@ -26,7 +26,7 @@ public class ConnectionManager {
 	private String username = "connect";
 
 	// Clave de usuario
-	private String password = "Javier*123";
+	private String password = "Eduardo*123";
 
 	private Connection conn = null;
 
