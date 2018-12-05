@@ -73,9 +73,15 @@ public class UserServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+      User user= userService.getUsuarioByUsuario((String)request.getParameter("usuario"));
 		
-		doGet(request, response);
+      if(user!=null)
+      {
+    	  if(user.getContrasena()==(String)request.getParameter("contrasena")) {
+    		  doGet(request, response);
+    	  }
+      }
+		
 	}
 
 }
