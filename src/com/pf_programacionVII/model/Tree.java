@@ -30,6 +30,7 @@ public class Tree extends Materia{
 	public void setChild(ArrayList<Tree> child) {
 		this.children = child;
 	}
+	
 	public String toStringTree() {
 		ArrayList<JoinPlanEstudioMaterias> joinsGet =join.getJoinByIdPrerequsitoAndIdPlanEstudio(getId(), idPlanEstudio);
 		String strTree ="<ul>\n" + 
