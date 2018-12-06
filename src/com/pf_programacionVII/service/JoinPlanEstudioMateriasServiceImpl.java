@@ -4,25 +4,29 @@ import java.util.ArrayList;
 
 import com.pf_programacionVII.model.JoinPlanEstudioMaterias;
 import com.pf_programacionVII.repository.JoinPlanEstudioMateriasRepository;
+import com.pf_programacionVII.repository.UserRepository;
 
 public class JoinPlanEstudioMateriasServiceImpl implements JoinPlanEstudioMateriasService {
 
 	JoinPlanEstudioMateriasRepository join = new JoinPlanEstudioMateriasRepository();
-	
-	
+
 	@Override
 	public ArrayList<JoinPlanEstudioMaterias> getAllJoin() {
 		return join.getAll("Call GetPlanEstudioMaterias()");
 	}
-
 	@Override
-	public JoinPlanEstudioMaterias getJoinById(int idJoin) {
-		return null;
+	public ArrayList<JoinPlanEstudioMaterias> getJoinByIdPrerequsitoAndIdPlanEstudio(int idPrerequisito, int idPlanEstudio) {		
+		return join.getJoinByIdPrerequisitoAndIdPlanEstudio("Call GetPlanEstudioMateriasByIdPrerequisitoAndIdPlanEstudio(?,?)", idPrerequisito, idPlanEstudio);
 	}
 
 	@Override
-	public JoinPlanEstudioMaterias getJoinByidPlanEstudioMaterias(int idPlanEstudio) {
-		return join.getJoinById("Call GetPlanEstudioMateriasByidPlanEstudioMaterias(?)", idPlanEstudio);
+	public JoinPlanEstudioMaterias getJoinById(int idJoin) {
+		return join.getJoinById("Call GetPlanEstudioMateriasById(?)", idJoin);
+	}
+
+	@Override
+	public ArrayList<JoinPlanEstudioMaterias> getJoinByidPlanEstudio(int idPlanEstudio) {
+		return join.getJoinByIdPlanEstudio("Call GetPlanEstudioMateriasByidPlanEstudio(?)", idPlanEstudio);
 	}
 
 	@Override
@@ -41,5 +45,8 @@ public class JoinPlanEstudioMateriasServiceImpl implements JoinPlanEstudioMateri
 		this.join.deleteJoin("deletePlanEstudioMaterias(?)", idJoin);
 		
 	}
+
+
+	
 
 }
