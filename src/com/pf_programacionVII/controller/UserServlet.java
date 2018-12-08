@@ -44,17 +44,14 @@ public class UserServlet extends HttpServlet {
         User actualUser =(User)session.getAttribute("user");
 		
         
-      for(JoinPlanEstudioMaterias joinFor : join.getJoinByidPlanEstudio(1))
+      for(JoinPlanEstudioMaterias joinFor : join.getJoinByIdPrerequsitoAndIdPlanEstudio(0, 1))
       {
-    	  if(joinFor.getPrerequisitoMateriaId()==0)
-    	  {
+
     		  Materia materia = materiasServiceImpl.getMateriaByidMateria(joinFor.getMateriaId());
     		  Tree tree = new Tree(materia,1);
     		  str2+="<li>";
     		  str2 += tree.toStringTree();
     		  str2+="</li>";
-    		  
-    	  }
       }
       str2+="</ul>";
 		
@@ -147,7 +144,7 @@ public class UserServlet extends HttpServlet {
     	  }else {
     		  System.out.println("Stage 5 - Not Authenticated: Wrong Password");
     		  alertClass = "alert alert-danger visible";
-        	  alertMsg = "Usuario y/o Contraseña incorrecta.";
+        	  alertMsg = "Usuario y/o Contraseï¿½a incorrecta.";
         	  request.setAttribute("alertClass", alertClass);
         	  request.setAttribute("alertMsg", alertMsg);
     		  RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(redirectURL);
