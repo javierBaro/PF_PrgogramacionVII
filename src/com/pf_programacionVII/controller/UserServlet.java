@@ -29,9 +29,8 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	UserServiceImpl userService = new UserServiceImpl();
-	CarreraServiceImpl carreraServiceImpl = new CarreraServiceImpl();
-	MateriasServiceImpl materiasServiceImpl = new MateriasServiceImpl();
 	JoinPlanEstudioMateriasServiceImpl join = new JoinPlanEstudioMateriasServiceImpl();
+	CarreraServiceImpl carreraServiceImpl = new CarreraServiceImpl();
 	String userinfo;
 	HttpSession session;
 
@@ -42,19 +41,8 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		session = (HttpSession) request.getSession(true);
 		User actualUser =(User)session.getAttribute("actualUser");
-		int planEstudioId= actualUser.getPlanStudioId();
-		String carrera = carreraServiceImpl.getCarreraByidPlanEstudio(planEstudioId).getNombre();
-		String str="",str2="<ul>" ;
-		
-      for(JoinPlanEstudioMaterias joinFor : join.getJoinByIdPrerequsitoAndIdPlanEstudio(0, planEstudioId))
-      {
-    		  Materia materia = materiasServiceImpl.getMateriaByidMateria(joinFor.getMateriaId());
-    		  Tree tree = new Tree(materia,1);
-    		  str2+="<li>";
-    		  str2 += tree.toStringTree();
-    		  str2+="</li>";
-      }
-      str2+="</ul>";
+		String str="";
+
       
 		str+="<html class=\" -moz-\" lang=\"es\">\n" + 
 				"<head>\n" + 
@@ -66,8 +54,8 @@ public class UserServlet extends HttpServlet {
 				"<div class=\"tree\">\n" + 
 				"		<ul>" + 
 				"			<li>" + 
-				"				<a href=\"#\">"+carrera+"</a>\n" 
-				+str2+
+				"				<a href=\"#\">"+carreraServiceImpl.getCarreraByidPlanEstudio(actualUser.getPlanStudioId()).getNombre()+"</a>\n" 
+				+userService.getStringFathersAndChildTree(actualUser)+
 				"			</li>\n" + 
 				"		</ul>\n" + 
 				"	</div>\n" + 

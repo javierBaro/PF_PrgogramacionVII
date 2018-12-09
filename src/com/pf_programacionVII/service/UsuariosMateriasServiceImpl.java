@@ -43,14 +43,19 @@ public class UsuariosMateriasServiceImpl implements UsuariosMateriasService {
 
 	@Override
 	public void deleteUsuariosMaterias(int idUsuariosMaterias) {
-		usuariosMateriasRepository.deleteUsuariosMaterias("Call DeleteUsuariosMaterias", idUsuariosMaterias);
+		usuariosMateriasRepository.deleteUsuariosMaterias("Call DeleteUsuariosMaterias(?)", idUsuariosMaterias);
 		
 	}
 
 	@Override
 	public void deleteUsuariosMateriasByIdUsuario(int idUsuario) {
-		usuariosMateriasRepository.deleteUsuariosMateriasByIdUsuario("Call DeleteUsuariosmateriasByIdUsuario", idUsuario);
+		usuariosMateriasRepository.deleteUsuariosMateriasByIdUsuario("Call DeleteUsuariosmateriasByIdUsuario(?)", idUsuario);
 		
+	}
+
+	@Override
+	public UsuariosMaterias getUsuariosMateriasByIdUsuarioAndIdMateria(int idUsuario, int idMateria) {
+		return usuariosMateriasRepository.getUsuariosMateriasByIdUsuarioAndIdMateria("Call GetUsuariosMateriasByIdUsuarioAndIdMateria(?,?)", idUsuario, idMateria);
 	}
 
 	

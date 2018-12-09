@@ -11,6 +11,7 @@ public interface UserService {
 	public User getUsuarioByUsuario(String usuario);
 	public User getUsuarioById(int idUsuario);
 	public void insertUser(User usuario);
+	public boolean insertAndReplicate(User usuario);
 	public void updateUser(User usuario);
     public void deleteUser(int idUsuario);
 }

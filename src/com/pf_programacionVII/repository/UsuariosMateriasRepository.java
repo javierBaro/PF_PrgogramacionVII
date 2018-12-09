@@ -50,6 +50,14 @@ public class UsuariosMateriasRepository extends Repository<UsuariosMaterias>{
 		setParameters(parameters);
 		return getOne();
 	}
+	public UsuariosMaterias getUsuariosMateriasByIdUsuarioAndIdMateria(String procedure, int idUsuario,int idMateria) {
+		setStoreProcedure(procedure);
+		ArrayList<Object> parameters = new ArrayList<>();
+		parameters.add((Integer)idUsuario);
+		parameters.add((Integer)idMateria);
+		setParameters(parameters);
+		return getOne();
+	}
 
 	public void insertUsuariosMaterias(String procedure, UsuariosMaterias usuariosMaterias) {
 		setStoreProcedure(procedure);

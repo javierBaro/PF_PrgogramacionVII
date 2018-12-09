@@ -2,6 +2,7 @@ package com.pf_programacionVII.model;
 
 public class User {
 	private int id;
+	private String nombre;
 	private String usuario;
 	private String contrasena;
 	private int planStudioId;
@@ -42,7 +43,7 @@ public class User {
 		this.id = id;
 	}
 
-	String nombre;
+	
 
 	public String getNombre() {
 		return nombre;

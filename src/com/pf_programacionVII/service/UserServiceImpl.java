@@ -3,12 +3,21 @@ package com.pf_programacionVII.service;
 
 import java.util.ArrayList;
 
+import com.pf_programacionVII.model.JoinPlanEstudioMaterias;
+import com.pf_programacionVII.model.Materia;
+import com.pf_programacionVII.model.Tree;
 import com.pf_programacionVII.model.User;
+import com.pf_programacionVII.model.UsuariosMaterias;
+import com.pf_programacionVII.repository.JoinPlanEstudioMateriasRepository;
 import com.pf_programacionVII.repository.UserRepository;
 
 public class UserServiceImpl implements UserService {
 
-	UserRepository userRepository =new UserRepository();
+	private UserRepository userRepository =new UserRepository();
+	private JoinPlanEstudioMateriasServiceImpl join =new JoinPlanEstudioMateriasServiceImpl();
+	private UsuariosMateriasServiceImpl usuariosMateriasService = new UsuariosMateriasServiceImpl();
+	
+	
 	
 	@Override
 	public ArrayList<User> getAllUsuarios() {
@@ -40,6 +49,26 @@ public class UserServiceImpl implements UserService {
 		return userRepository.getUserById("Call GetUsuarioById(?)", idUsuario);
 	}
 
+	@Override
+	public boolean insertAndReplicate(User usuario) {
+		
+		if(getUsuarioByUsuario(usuario.getUsuario())==null)
+		{
+			insertUser(usuario);
+			User userInsertado = getUsuarioByUsuario(usuario.getUsuario());
+
+			for(JoinPlanEstudioMaterias join: join.getJoinByidPlanEstudio(usuario.getPlanStudioId()))
+			{
+				usuariosMateriasService.insertUsuariosMaterias(new UsuariosMaterias(userInsertado.getId(),join.getId(),0));
+			}
+			return true;
+		}
+		return false;	
+	}
+	public String getStringFathersAndChildTree(User actualUser) {
+		return new Tree().getStringFathersAndChildTree(actualUser);
+	}
 	
+
 
 }

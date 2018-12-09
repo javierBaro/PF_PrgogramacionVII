@@ -48,10 +48,11 @@ public class LoginServlet extends HttpServlet {
 			ArrayList<PlanEstudio> plan=new ArrayList<>();
 			for(PlanEstudio planEstudio : planEstudioService.getPlanEstudioByidCarrera(carrera.getId()))
 				plan.add(planEstudio);
-				
+			
 			hmPlanEstudio.put(carrera.getNombre(),plan);
 		}
 		request.setAttribute("planEstudio", hmPlanEstudio);
+		
 	  RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
   	  dispatcher.forward(request, response);
 	}

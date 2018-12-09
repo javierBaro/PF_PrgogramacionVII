@@ -94,6 +94,14 @@
 						<br>
 						<form id="form_reg" action="Registro" method="post" >
 
+
+                           <div class="form-group row">
+								<label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
+								<div class="col-md-6">
+									<input type="text" id="name" class="form-control"
+										name="nombre" required>
+								</div>
+							</div>
 							<div class="form-group row">
 								<label for="user" class="col-md-4 col-form-label text-md-right">Usuario</label>
 								<div class="col-md-6">
@@ -161,6 +169,11 @@
 			</div>
 		</div>
 	</div>
+	<%if(request.getAttribute("Message")!=null) 
+	{
+		%><script>alert('<%=request.getAttribute("Message")%>');</script><%
+	}
+	%>
 	<script src="static/confirm_password.js?=112"></script>
 </body>
 </html>
