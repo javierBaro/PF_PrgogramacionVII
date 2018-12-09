@@ -36,4 +36,9 @@ public class CarreraServiceImpl implements CarreraService {
 		this.carreraRepository.deleteCarrera("Call DeleteCarrera(?)", idCarrera);
 	}
 
+	@Override
+	public Carrera getCarreraByidPlanEstudio(int idPlanEstudio) {
+		return this.carreraRepository.getCarreraByIdPlanEstudio("Call GetCarreraByIdPlanEstudio(?)", idPlanEstudio);
+	}
+
 }

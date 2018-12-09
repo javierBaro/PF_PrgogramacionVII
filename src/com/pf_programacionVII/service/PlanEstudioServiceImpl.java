@@ -38,7 +38,11 @@ public class PlanEstudioServiceImpl implements PlanEstudioService{
 	@Override
 	public void deletePlanEstudio(int idPlanEstudio) {
 		planEstudioRepository.deletePlanEstudio("Call DeletePlanEstudio(?)", idPlanEstudio);
-		
+	}
+
+	@Override
+	public ArrayList<PlanEstudio> getPlanEstudioByidCarrera(int idCarrera) {
+		return planEstudioRepository.getPlanEstudioByIdCarrera("Call GetPlanEstudioByIdCarrera(?)", idCarrera);
 	}
 
 

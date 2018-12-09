@@ -1,0 +1,67 @@
+package com.pf_programacionVII.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+import com.pf_programacionVII.model.Carrera;
+import com.pf_programacionVII.model.PlanEstudio;
+import com.pf_programacionVII.service.CarreraServiceImpl;
+import com.pf_programacionVII.service.PlanEstudioServiceImpl;
+
+
+
+/**
+ * Servlet implementation class LoginServlet
+ */
+@WebServlet("/Login")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       PlanEstudioServiceImpl planEstudioService = new PlanEstudioServiceImpl();
+       CarreraServiceImpl carreraService= new CarreraServiceImpl();
+
+    /**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LoginServlet() {
+	    super();
+	    // TODO Auto-generated constructor stub
+	}
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	 
+
+		HashMap<String , ArrayList<PlanEstudio>> hmPlanEstudio = new HashMap<>();
+		
+		for(Carrera carrera : carreraService.getAllCarrera())
+		{	
+			ArrayList<PlanEstudio> plan=new ArrayList<>();
+			for(PlanEstudio planEstudio : planEstudioService.getPlanEstudioByidCarrera(carrera.getId()))
+				plan.add(planEstudio);
+				
+			hmPlanEstudio.put(carrera.getNombre(),plan);
+		}
+		request.setAttribute("planEstudio", hmPlanEstudio);
+	  RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+  	  dispatcher.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

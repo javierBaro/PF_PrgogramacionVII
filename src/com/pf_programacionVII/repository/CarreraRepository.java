@@ -27,11 +27,21 @@ public class CarreraRepository extends Repository<Carrera> {
 		setStoreProcedure(procedure);
 		return getMany();
 	}
+	
 	public Carrera getCarreraById(String procedure,int carreraId)
 	{
 	setStoreProcedure(procedure);
 	ArrayList<Object> parameters=new ArrayList<>();
 	parameters.add((Integer)carreraId);
+	setParameters(parameters);
+	return getOne();
+	}
+	
+	public Carrera getCarreraByIdPlanEstudio(String procedure,int planEstudioId)
+	{
+	setStoreProcedure(procedure);
+	ArrayList<Object> parameters=new ArrayList<>();
+	parameters.add((Integer)planEstudioId);
 	setParameters(parameters);
 	return getOne();
 	}

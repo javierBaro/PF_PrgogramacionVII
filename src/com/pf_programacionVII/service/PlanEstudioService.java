@@ -11,6 +11,7 @@ public interface PlanEstudioService {
 	public ArrayList<PlanEstudio> getAllPlanesEstudios() ;
 	public PlanEstudio getPlanEstudioByidPlanEstudio(int idPlanEstudio);
 	public PlanEstudio getPlanEstudioByidUsuario(int idUsuario);
+	public ArrayList<PlanEstudio> getPlanEstudioByidCarrera(int idCarrera);
 	public void insertPlanEstudio(PlanEstudio planEstudio);
 	public void updatePlanEstudio(PlanEstudio planEstudio);
     public void deletePlanEstudio(int idPlanEstudio);

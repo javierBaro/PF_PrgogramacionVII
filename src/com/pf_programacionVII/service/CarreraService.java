@@ -8,6 +8,7 @@ public interface CarreraService {
  
 	public ArrayList<Carrera> getAllCarrera();
 	public Carrera getCarreraByidCarrera(int idCarrera);
+	public Carrera getCarreraByidPlanEstudio(int idPlanEstudio);
 	public void insertCarrera(String carrera);
 	public void updateCarrera(Carrera carrera);
     public void deleteCarrera(int idCarrera);

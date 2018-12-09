@@ -5,8 +5,6 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 
 import com.pf_programacionVII.connection.ConnectionManager;
 

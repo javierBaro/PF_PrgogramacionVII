@@ -50,6 +50,16 @@ public class PlanEstudioRepository extends Repository<PlanEstudio> {
 	return getOne();
 	}
 	
+	public ArrayList<PlanEstudio> getPlanEstudioByIdCarrera(String procedure,int carreraId)
+	{
+	setStoreProcedure(procedure);
+	ArrayList<Object> parameters=new ArrayList<>();
+	parameters.add((Integer)carreraId);
+	setParameters(parameters);
+	return getMany();
+	}
+	
+	
 	public void insertPlanEstudio(String procedure, PlanEstudio planEstudio) {
 		setStoreProcedure(procedure);
 		ArrayList<Object> parameters=new ArrayList<>();
