@@ -136,7 +136,9 @@ public class LoginServlet extends HttpServlet {
     		  System.out.println("Console: - LoginServlet.java | Stage 5 - Not Authenticated: Wrong Password");
 
     		  alertClass 	= "alert alert-danger visible";
+
         	  alertMsg 		= "Usuario y/o Contrase�a incorrecta.";
+
     	  }
       }else {
     	  // Console Logs for Login

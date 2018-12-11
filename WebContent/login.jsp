@@ -6,6 +6,24 @@
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+	
+<%
+String alertClass 	= "alert alert-danger invisible d-none"; 
+String alertMsg 	= "Bootup";
+boolean attempts2;
+
+try{
+	attempts2 = (boolean)request.getAttribute("attempt");
+} catch(Exception e){
+	attempts2 = false;
+}
+
+if(attempts2){
+	alertMsg = (String)request.getAttribute("alertMsg");
+	alertClass = (String)request.getAttribute("alertClass");
+}
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,11 +59,19 @@
 				<div class="tab-content">
 					<div id="home" class="container tab-pane active ">
 
-						<form  method="post" action="User">
+						<form  method="post" action="Login">
 							<br>
 							<div class="form-group row">
 								<div class="col-md-4"></div>
-								<div class="col-md-6">
+								<div class="col-md-4">
+									<div class=<%= '"' + alertClass + '"' %> role="alert">
+										<%= alertMsg %>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
 									<label>Email / Usuario</label>
 									<div class="input-group">
 										<div class="input-group-prepend">
@@ -62,7 +88,7 @@
 
 							<div class="form-group row">
 								<div class="col-md-4"></div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<label>Contraseña</label>
 									<div class="input-group">
 										<div class="input-group-prepend">
@@ -70,7 +96,7 @@
 												aria-hidden="true"></i></span>
 										</div>
 										<input type="password" name="contrasena" class="form-control"
-											required="">
+											required>
 									</div>
 								</div>
 							</div>
@@ -78,9 +104,16 @@
 
 							<div class="form-group row">
 								<div class="col-md-4"></div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<input type="submit" class="btn btn-primary btn-lg btn-block "
 										value="Login" name="submit">
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+									<div> <a href="Logout">Logout</a></div>
 								</div>
 							</div>
 
@@ -165,13 +198,16 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 	<%if(request.getAttribute("Message")!=null) 
 	{
 		%><script>alert('<%=request.getAttribute("Message")%>');</script><%
 	}
 	%>
+	<script>
+		$(".alert").delay(4000).slideUp(200, function() {
+		    $(this).alert('close');
+		});
+	</script>
 	<script src="static/confirm_password.js?=112"></script>
 </body>
 </html>
