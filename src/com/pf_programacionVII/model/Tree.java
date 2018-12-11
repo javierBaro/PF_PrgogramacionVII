@@ -6,6 +6,7 @@ import com.pf_programacionVII.service.MateriasServiceImpl;
 import com.pf_programacionVII.service.UsuariosMateriasServiceImpl;
 
 
+
 public class Tree extends Materia{
 
 
@@ -19,6 +20,7 @@ public class Tree extends Materia{
 	private String strTree;
 	private String strMateria;
 	private String strNoRealizadas;
+	ArrayList<MateriaRealizada> materiaRealizadas = new ArrayList<>();
 	
 	
 	public Tree () {
@@ -62,58 +64,6 @@ public class Tree extends Materia{
 		return strNoRealizadas;
 	}
 	
-	
-	public String getStringFathersAndChildTree(User actualUser,String carrera) {
-		int planEstudioId= actualUser.getPlanStudioId();
-		
-		strNoRealizadas="";
-		String str="";
-      for(JoinPlanEstudioMaterias joinFor : join.getJoinByIdPrerequsitoAndIdPlanEstudio(0, planEstudioId))
-      {
-    		  Materia materia = materiasService.getMateriaByidMateria(joinFor.getMateriaId());
-    		  Tree newTree = new Tree(materia,planEstudioId,actualUser.getId()).getStringChildTree();
-    		  
-			  strTree = "['"+carrera+"','"+newTree.getStrMateria()+"'],";
-              str += strTree + newTree.getStrTree();
-             strNoRealizadas += ","+newTree.getStrNoRealizadas();
-              
-      }
-
-      return str;
-	}
-	
-	public Tree getStringChildTree() {
-		ArrayList<JoinPlanEstudioMaterias> joinsGet =join.getJoinByIdPrerequsitoAndIdPlanEstudio(getId(), idPlanEstudio);
-		UsuariosMaterias usuariosMaterias = usuariosMateriasService.getUsuariosMateriasByIdUsuarioAndIdMateria(idUsuario, getId());
-		 strMateria = getNombre();
-		strTree="";
-		if(usuariosMaterias.getRealizado()==0)
-			strNoRealizadas ="'"+getNombre()+"'";
-		
-		if(!joinsGet.isEmpty() )
-		{
-
-			
-		  ArrayList<Tree> trees = new ArrayList<>();
-		    for (JoinPlanEstudioMaterias joinFor : joinsGet ) 
-			{
-
-				
-				Materia materia = materiasService.getMateriaByidMateria(joinFor.getMateriaId());
-				Tree newTree = new Tree(materia,idPlanEstudio,idUsuario);
-				strMateria = getNombre();
-				
-				tree= newTree.getStringChildTree();
-				strNoRealizadas ="'"+getNombre()+"',"+newTree.getStrNoRealizadas();
-				strTree = "['"+getNombre()+"','"+newTree.getStrMateria()+"'],";
-                strTree += tree.getStrTree(); 			
-			}
-			
-		}
-		
-		return this;
-	}
-
 	public String getStrTree() {
 		return strTree;
 	}
@@ -138,4 +88,66 @@ public class Tree extends Materia{
 		this.strNoRealizadas = strNoRealizadas;
 	}
 	
+	public ArrayList<MateriaRealizada> getMateriaRealizadas() {		
+		return materiaRealizadas;
+	}
+
+	public void setMateriaRealizadas(ArrayList<MateriaRealizada> materiaRealizadas) {
+		this.materiaRealizadas = materiaRealizadas;
+	}
+	public String getStringFathersAndChildTree(User actualUser,String carrera) {
+		int planEstudioId= actualUser.getPlanStudioId();
+		
+		strNoRealizadas="";
+		String str="";
+      for(JoinPlanEstudioMaterias joinFor : join.getJoinByIdPrerequsitoAndIdPlanEstudio(0, planEstudioId))
+      {
+    		  Materia materia = materiasService.getMateriaByidMateria(joinFor.getMateriaId());
+    		  Tree newTree = new Tree(materia,planEstudioId,actualUser.getId()).getStringChildTree();  			
+			  strTree = "['"+carrera+"','"+newTree.getStrMateria()+"'],";
+              str += strTree + newTree.getStrTree();
+              materiaRealizadas.addAll(newTree.getMateriaRealizadas());
+             strNoRealizadas += ","+newTree.getStrNoRealizadas();
+             
+      }
+
+      return str;
+	}
+	
+	public Tree getStringChildTree() {
+		ArrayList<JoinPlanEstudioMaterias> joinsGet =join.getJoinByIdPrerequsitoAndIdPlanEstudio(getId(), idPlanEstudio);
+		UsuariosMaterias usuariosMaterias = usuariosMateriasService.getUsuariosMateriasByIdUsuarioAndIdMateria(idUsuario, getId());
+		
+		strNoRealizadas ="";
+		strMateria = getNombre();
+		strTree="";
+
+		if(usuariosMaterias.getRealizado()==0)
+		{
+		    materiaRealizadas.add(new MateriaRealizada(getId(),getNombre(),false));
+			strNoRealizadas ="'"+getNombre()+"'";
+		}
+		else
+			materiaRealizadas.add(new MateriaRealizada(getId(),getNombre(),true));
+
+
+		if(!joinsGet.isEmpty() )
+		{
+
+		    for (JoinPlanEstudioMaterias joinFor : joinsGet ) 
+			{
+				Materia materia = materiasService.getMateriaByidMateria(joinFor.getMateriaId());
+				Tree newTree = new Tree(materia,idPlanEstudio,idUsuario);
+				strMateria = getNombre();
+				tree= newTree.getStringChildTree();	
+				strTree = "['"+getNombre()+"','"+newTree.getStrMateria()+"'],";
+                strTree += tree.getStrTree(); 
+                materiaRealizadas.addAll(newTree.getMateriaRealizadas());
+                
+                strNoRealizadas +=","+newTree.getStrNoRealizadas();
+           
+			}	
+ 		}
+		return this;
+	}
 }

@@ -84,11 +84,9 @@ public class UsuariosMateriasRepository extends Repository<UsuariosMaterias>{
 				parameters.add(usuariosMaterias.getPlanEstudioMateriasId());
 			else
 				parameters.add(usuariosMateriasServer.getPlanEstudioMateriasId());
-			
-			if (usuariosMaterias.getRealizado() != 0)
+
 				parameters.add(usuariosMaterias.getRealizado());
-			else
-				parameters.add(usuariosMateriasServer.getRealizado());
+
 			
 			parameters.add(usuariosMaterias.getId());
 

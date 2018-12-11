@@ -3,6 +3,7 @@ package com.pf_programacionVII.controller;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +31,6 @@ public class UserServlet extends HttpServlet {
        
 	UserServiceImpl userService = new UserServiceImpl();
 	JoinPlanEstudioMateriasServiceImpl join = new JoinPlanEstudioMateriasServiceImpl();
-	CarreraServiceImpl carreraServiceImpl = new CarreraServiceImpl();
 	String userinfo;
 	HttpSession session;
 
@@ -41,12 +41,10 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		session = (HttpSession) request.getSession(true);
 		User actualUser =(User)session.getAttribute("actualUser");
-		String carrera =carreraServiceImpl.getCarreraByidPlanEstudio(actualUser.getPlanStudioId()).getNombre();
-		String str="";
+		ArrayList<String> arrayList = userService.getStringFathersAndChildTree(actualUser);
 
-		request.setAttribute("tree",userService.getStringFathersAndChildTree(actualUser,carrera).get(0) );
-		request.setAttribute("noRealizado",userService.getStringFathersAndChildTree(actualUser,carrera).get(1) );
-
+		request.setAttribute("tree", arrayList.get(0));
+		request.setAttribute("noRealizado",arrayList.get(1) );
 		
 	  RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/tree.jsp");
   	  dispatcher.forward(request, response);

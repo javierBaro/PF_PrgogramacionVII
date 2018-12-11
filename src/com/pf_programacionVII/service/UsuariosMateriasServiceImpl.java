@@ -37,7 +37,7 @@ public class UsuariosMateriasServiceImpl implements UsuariosMateriasService {
 
 	@Override
 	public void updatetUsuariosMaterias(UsuariosMaterias usuariosMaterias) {
-		usuariosMateriasRepository.updatetUsuariosMaterias("Call UpdateUsuariosMaterias(?,?,?,?)", "Call GetUsuariosMateriasById(?)", usuariosMaterias);
+		usuariosMateriasRepository.updatetUsuariosMaterias("Call UpdateUsuarioMateria(?,?,?,?)", "Call GetUsuariosMateriasById(?)", usuariosMaterias);
 		
 	}
 

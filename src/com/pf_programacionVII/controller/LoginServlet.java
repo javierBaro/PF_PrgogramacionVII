@@ -84,6 +84,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		// TODO Auto-generated method stub
 		
 		User 	user 		= userService.getUsuarioByUsuario((String)request.getParameter("login_name"));
@@ -135,7 +136,9 @@ public class LoginServlet extends HttpServlet {
     		  System.out.println("Console: - LoginServlet.java | Stage 5 - Not Authenticated: Wrong Password");
 
     		  alertClass 	= "alert alert-danger visible";
-        	  alertMsg 		= "Usuario y/o Contraseña incorrecta.";
+
+        	  alertMsg 		= "Usuario y/o Contraseï¿½a incorrecta.";
+
     	  }
       }else {
     	  // Console Logs for Login
