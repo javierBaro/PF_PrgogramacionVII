@@ -15,6 +15,10 @@ public class Tree extends Materia{
 	private UsuariosMateriasServiceImpl usuariosMateriasService = new UsuariosMateriasServiceImpl();
 	private int idPlanEstudio;
 	private int idUsuario;
+	private Tree tree;
+	private String strTree;
+	private String strMateria;
+	private String strNoRealizadas;
 	
 	
 	public Tree () {
@@ -31,13 +35,9 @@ public class Tree extends Materia{
 		super(materia.getId(), materia.getNombre());
 		this.idPlanEstudio = idPlanEstudio;
 		this.idUsuario=idUsuario;
+		
 	}
-	public ArrayList<Tree> getChild() {
-		return children;
-	}
-	public void setChild(ArrayList<Tree> child) {
-		this.children = child;
-	}
+	
 
 	public Tree getTree() {
 		return (this);
@@ -57,84 +57,85 @@ public class Tree extends Materia{
 		this.idUsuario = idUsuario;
 	}
 
-	
-	public void setChildTree() {
-		ArrayList<JoinPlanEstudioMaterias> joinsGet =join.getJoinByIdPrerequsitoAndIdPlanEstudio(getId(), idPlanEstudio);
-
-		if(!joinsGet.isEmpty() )
-		{
-			ArrayList<Tree> trees = new ArrayList<>();
-			for (JoinPlanEstudioMaterias joinFor : joinsGet ) {
-				Materia materia = materiasService.getMateriaByidMateria(joinFor.getMateriaId());
-				Tree tree = new Tree(materia,idPlanEstudio,idUsuario);
-			    trees.add(tree);
-			}
-			setChild(trees);
-		}
-
+	public String getStringNoRalizado() {
+		System.out.println(strNoRealizadas);
+		return strNoRealizadas;
 	}
 	
-	public String getStringFathersAndChildTree(User actualUser) {
+	
+	public String getStringFathersAndChildTree(User actualUser,String carrera) {
 		int planEstudioId= actualUser.getPlanStudioId();
 		
-		String str2="<ul>" ;
-		
+		strNoRealizadas="";
+		String str="";
       for(JoinPlanEstudioMaterias joinFor : join.getJoinByIdPrerequsitoAndIdPlanEstudio(0, planEstudioId))
       {
     		  Materia materia = materiasService.getMateriaByidMateria(joinFor.getMateriaId());
-    		  Tree tree = new Tree(materia,1,actualUser.getId());
-    		  str2+="<li>";
-    		  str2 += tree.getStringChildTree();
-    		  str2+="</li>";
+    		  Tree newTree = new Tree(materia,planEstudioId,actualUser.getId()).getStringChildTree();
+    		  
+			  strTree = "['"+carrera+"','"+newTree.getStrMateria()+"'],";
+              str += strTree + newTree.getStrTree();
+             strNoRealizadas += ","+newTree.getStrNoRealizadas();
+              
       }
-      str2+="</ul>";
-      return str2;
+
+      return str;
 	}
 	
-	public String getStringChildTree() {
+	public Tree getStringChildTree() {
 		ArrayList<JoinPlanEstudioMaterias> joinsGet =join.getJoinByIdPrerequsitoAndIdPlanEstudio(getId(), idPlanEstudio);
 		UsuariosMaterias usuariosMaterias = usuariosMateriasService.getUsuariosMateriasByIdUsuarioAndIdMateria(idUsuario, getId());
-		String checked="";
-		if(usuariosMaterias!=null)
-		{
-			if(usuariosMaterias.getRealizado()==1)
-				checked="checked";
-		}
-
-		String strTree =
-		"<ul>\n" + 
-		  "<li>\n" + 
-		    "<a href=\"#\"><input type=\"checkbox\" name="+getId()+" "+checked+">"+getNombre()+"</a>";
-
+		 strMateria = getNombre();
+		strTree="";
+		if(usuariosMaterias.getRealizado()==0)
+			strNoRealizadas ="'"+getNombre()+"'";
+		
 		if(!joinsGet.isEmpty() )
 		{
-			if(joinsGet.size()>1)
-				strTree+=" <ul>";
+
 			
 		  ArrayList<Tree> trees = new ArrayList<>();
 		    for (JoinPlanEstudioMaterias joinFor : joinsGet ) 
 			{
-				
-				if(joinsGet.size()>1)
-					strTree+="<li>";
+
 				
 				Materia materia = materiasService.getMateriaByidMateria(joinFor.getMateriaId());
-				Tree tree = new Tree(materia,idPlanEstudio,idUsuario);
-				strTree += tree.getStringChildTree();
-			   
-			    if(joinsGet.size()>1)
-					strTree+="</li>";
+				Tree newTree = new Tree(materia,idPlanEstudio,idUsuario);
+				strMateria = getNombre();
+				
+				tree= newTree.getStringChildTree();
+				strNoRealizadas ="'"+getNombre()+"',"+newTree.getStrNoRealizadas();
+				strTree = "['"+getNombre()+"','"+newTree.getStrMateria()+"'],";
+                strTree += tree.getStrTree(); 			
 			}
 			
-			if(joinsGet.size()>1)
-				strTree+="</ul>";
 		}
 		
-    strTree += 
-         "</li>" + 
-	 "</ul>";
-		
+		return this;
+	}
+
+	public String getStrTree() {
 		return strTree;
+	}
+
+	public void setStrTree(String strTree) {
+		this.strTree = strTree;
+	}
+
+	public String getStrMateria() {
+		return strMateria;
+	}
+
+	public void setStrMateria(String strMateria) {
+		this.strMateria = strMateria;
+	}
+
+	public String getStrNoRealizadas() {
+		return strNoRealizadas;
+	}
+
+	public void setStrNoRealizadas(String strNoRealizadas) {
+		this.strNoRealizadas = strNoRealizadas;
 	}
 	
 }

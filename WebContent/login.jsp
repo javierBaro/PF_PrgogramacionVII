@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap Example</title>
+<title>Login</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,8 +28,6 @@
 	<br>
 	<br>
 	<div class="container">
-		<div class="row align-items-center ">
-			<div class="col-6 mx-auto">
 
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">

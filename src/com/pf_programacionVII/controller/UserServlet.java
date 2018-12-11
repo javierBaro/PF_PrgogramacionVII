@@ -41,28 +41,16 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		session = (HttpSession) request.getSession(true);
 		User actualUser =(User)session.getAttribute("actualUser");
+		String carrera =carreraServiceImpl.getCarreraByidPlanEstudio(actualUser.getPlanStudioId()).getNombre();
 		String str="";
 
-      
-		str+="<html class=\" -moz-\" lang=\"es\">\n" + 
-				"<head>\n" + 
-				"<meta charset=\"utf-8\">\n" + 
-				"<title></title>\n" + 
-				"<link rel=\"stylesheet\" type=\"text/css\" href=\"static/ddf.css\" media=\"screen\">\n" + 
-				"</head>\n" + 
-				"<body>\n" + 
-				"<div class=\"tree\">\n" + 
-				"		<ul>" + 
-				"			<li>" + 
-				"				<a href=\"#\">"+carreraServiceImpl.getCarreraByidPlanEstudio(actualUser.getPlanStudioId()).getNombre()+"</a>\n" 
-				+userService.getStringFathersAndChildTree(actualUser)+
-				"			</li>\n" + 
-				"		</ul>\n" + 
-				"	</div>\n" + 
-				"</body>\n" + 
-			"</html>";
+		request.setAttribute("tree",userService.getStringFathersAndChildTree(actualUser,carrera).get(0) );
+		request.setAttribute("noRealizado",userService.getStringFathersAndChildTree(actualUser,carrera).get(1) );
 
-		response.getWriter().append(str);
+		
+	  RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/tree.jsp");
+  	  dispatcher.forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

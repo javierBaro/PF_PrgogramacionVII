@@ -65,8 +65,16 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;	
 	}
-	public String getStringFathersAndChildTree(User actualUser) {
-		return new Tree().getStringFathersAndChildTree(actualUser);
+	public ArrayList<String> getStringFathersAndChildTree(User actualUser,String carrera) {
+		ArrayList<String> arrayList =new ArrayList<>();
+		Tree tree = new Tree();
+
+		arrayList.add(tree.getStringFathersAndChildTree(actualUser, carrera));
+		arrayList.add(tree.getStringNoRalizado());
+		return arrayList;
+	}
+	public String getStringNoRealizadas(User actualUser,String carrera) {
+		return new Tree().getStringFathersAndChildTree(actualUser,carrera);
 	}
 	
 
