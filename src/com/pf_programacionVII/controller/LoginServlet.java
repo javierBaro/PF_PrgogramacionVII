@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 
 
-		/*HashMap<String , ArrayList<PlanEstudio>> hmPlanEstudio = new HashMap<>();
+		HashMap<String , ArrayList<PlanEstudio>> hmPlanEstudio = new HashMap<>();
 		
 		for(Carrera carrera : carreraService.getAllCarrera())
 		{	
@@ -62,21 +62,21 @@ public class LoginServlet extends HttpServlet {
 				plan.add(planEstudio);
 			
 			hmPlanEstudio.put(carrera.getNombre(),plan);
-		}*/
+		}
 		
 		
 		/*request.setAttribute("planEstudio", hmPlanEstudio);*/
 		
 		// Testing Login Confirmation
-		/*request.setAttribute("alertClass", alertClass);
+		request.setAttribute("alertClass", alertClass);
 		request.setAttribute("alertMsg", alertMsg);
 		request.setAttribute("attempt", attempts2);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");*/
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 		// Loading Login success
 		
-		User 	user 		= userService.getUsuarioByUsuario((String)request.getParameter("login_name"));
-		session.setAttribute("actualUser", user);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/dashboard.jsp");
+		/*User 	user 		= userService.getUsuarioByUsuario((String)request.getParameter("login_name"));
+		session.setAttribute("actualUser", user);*/
+		/*RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/dashboard.jsp");*/
   	  dispatcher.forward(request, response);
 	}
 
