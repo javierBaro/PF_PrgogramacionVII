@@ -32,6 +32,10 @@ public class LoginServlet extends HttpServlet {
        PlanEstudioServiceImpl planEstudioService = new PlanEstudioServiceImpl();
        CarreraServiceImpl carreraService= new CarreraServiceImpl();
 
+       	String 	alertClass 	= "alert alert-danger invisible"; 
+		String 	alertMsg 	= "No Hay Alerta";
+		boolean attempts2 	= true;
+       
 		UserServiceImpl userService = new UserServiceImpl();
 		JoinPlanEstudioMateriasServiceImpl join = new JoinPlanEstudioMateriasServiceImpl();
 		CarreraServiceImpl carreraServiceImpl = new CarreraServiceImpl();
@@ -59,9 +63,18 @@ public class LoginServlet extends HttpServlet {
 			
 			hmPlanEstudio.put(carrera.getNombre(),plan);
 		}
+		
+		
 		request.setAttribute("planEstudio", hmPlanEstudio);
 		
-	  RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+		// Testing Login Confirmation
+		request.setAttribute("alertClass", alertClass);
+		request.setAttribute("alertMsg", alertMsg);
+		request.setAttribute("attempt", attempts2);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+		// Loading Login success
+		
+		//RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/dashboard.jsp");
   	  dispatcher.forward(request, response);
 	}
 
@@ -71,81 +84,69 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		User user = userService.getUsuarioByUsuario((String)request.getParameter("login_name"));
-		String passTry = "End";
-		/*String redirectURL = "/pf_programacionVII/login.jsp";*/
-		String redirectURL = "/login.jsp";
-		String alertClass = "alert alert-danger invisible"; 
-		String alertMsg = "No Hay Alerta";
+		User 	user 		= userService.getUsuarioByUsuario((String)request.getParameter("login_name"));
+		String 	passTry 	= "End";
+		String 	redirectURL = "/login.jsp";
 		
+		// Exception Catching for User Login
 		try {
-			//System.out.println("Stage 0 - Try: " + "UserInput: " + user);
-			passTry = "Pass";
-			userinfo = userService.getUsuarioByUsuario(request.getParameter("login_name")).toString();
+			passTry 	= "Pass";
+			userinfo 	= userService.getUsuarioByUsuario(request.getParameter("login_name")).toString();
 			
-		}catch (Exception e) {
-			//throw e;
-			alertClass = "alert alert-danger visible";
-			alertMsg = "Usuario no Existe.";
-			request.setAttribute("alertClass", alertClass);
-			request.setAttribute("alertMsg", alertMsg);
-			//user = userService.getUsuarioByUsuario("Javier");
-			passTry = "Failed. No User Found. Set to Default.";
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(redirectURL);
-			dispatcher.forward(request, response);
-			//response.sendRedirect(redirectURL);
-			
-			
-			//System.out.println("Stage 0 - Exception: " + e + "ForcedUserInput: " + user.getUsuario());
+		} catch (Exception e) {
+			alertClass 	= "alert alert-danger visible";
+			alertMsg 	= "Usuario no encontrado.";
+			passTry 	= "PassTry: Failed. No User Found.";
+
 		} finally {
+			// Console Logs for Login
 			System.out.println("Stage 0 - End of TryCatch: " + "Result: " + passTry);
 			
 		}
 		
-		//String str="No Entro",str2="Wrong Password" ;
-		//alertMsg = (String)request.getAttribute("Name");
-		//userinfo = userService.getUsuarioByUsuario(request.getParameter("login_name")).toString();
-		//User user = userService.getUsuarioByUsuario((String)request.getParameter("login_name"));
+		// Console Logs for Login
 		System.out.println("Stage 1 - Notificacion: " + alertMsg);
 		System.out.println("Stage 2 - Sent Data: " + "Username:" + request.getParameter("login_name") + " Password: " + request.getParameter("contrasena"));
-		//System.out.println("Stage 2.5 - Request: " );
 		
       if(user!=null)
       {
+    	  // Console Logs for Login
     	  System.out.println("Stage 3 - Verification: User is Not Null");
     	  System.out.println("Stage 4 - Requested Data: " + "ReturnUsername" + user.getUsuario() + " ReturnPassword: " + user.getContrasena());
-/*    	  response.getWriter().append("Login Intro:" + (String)request.getParameter("login_name") + "<br>");
-    	  response.getWriter().append("Password Intro:" + (String)request.getParameter("contrasena") + "<br>");
-    	  response.getWriter().append("Return Login:" + user.getUsuario() + "<br>");
-    	  response.getWriter().append("Return Password:" + user.getContrasena() + "<br>");*/
-    	  //System.out.println(user.getContrasena());
+    	  
     	  if(user.getContrasena().equals(request.getParameter("contrasena"))) {
+    		  // Console Logs for Login
     		  System.out.println("Stage 5 - Authenticated: " + "Logged In");
-    		  System.out.println("Stage 6 - CallMaterias with doGet: ");
+    		  System.out.println("Stage 6 - Call Materias with doGet: ");
     		  
+    		  //Session Startup
     		  session =(HttpSession) request.getSession(true);
     		  session.setAttribute("actualUser", user);
-    	     // User actualUser =(User)session.getAttribute("user");
-    		  doGet(request, response);
     		  
-    		  //response.getWriter().append("Adentro");
+    		  alertClass 	= "alert alert-success visible";
+        	  alertMsg 		= "Login Exitoso.";
+        	  
+        	  // User actualUser =(User)session.getAttribute("user");
+    		  doGet(request, response);
     	  }else {
+    		  // Console Logs for Login
     		  System.out.println("Stage 5 - Not Authenticated: Wrong Password");
-    		  alertClass = "alert alert-danger visible";
-        	  alertMsg = "Usuario y/o Contraseï¿½a incorrecta.";
-        	  request.setAttribute("alertClass", alertClass);
-        	  request.setAttribute("alertMsg", alertMsg);
-    		  RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(redirectURL);
-        	  dispatcher.forward(request, response);
+
+    		  alertClass 	= "alert alert-danger visible";
+        	  alertMsg 		= "Usuario y/o Contraseña incorrecta.";
     	  }
-    	  //response.getWriter().append(str2);
-    	  //alertMsg = "alert alert-danger visible";
       }else {
-    	  
+    	  // Console Logs for Login
     	  System.out.println("Stage 3 - Verification: No User Found");
     	  
       }
-		
+      
+      request.setAttribute("alertClass", alertClass);
+      request.setAttribute("alertMsg", alertMsg);
+      request.setAttribute("attempt", attempts2);
+      
+      RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(redirectURL);
+      dispatcher.forward(request, response);
 	}
 
 }

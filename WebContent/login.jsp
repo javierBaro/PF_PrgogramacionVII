@@ -8,16 +8,15 @@
 	pageEncoding="utf-8"%>
 	
 <%
-String alertClass = "alert alert-danger invisible"; 
-String alertMsg = "Bootup";
-boolean attempts2 = false;
+String alertClass 	= "alert alert-danger invisible"; 
+String alertMsg 	= "Bootup";
+boolean attempts2;
 
 try{
-	attempts2 = (boolean)request.getAttribute("attempts2");
+	attempts2 = (boolean)request.getAttribute("attempt");
 } catch(Exception e){
 	attempts2 = false;
 }
-
 
 if(attempts2){
 	alertMsg = (String)request.getAttribute("alertMsg");
@@ -61,7 +60,7 @@ if(attempts2){
 				<div class="tab-content">
 					<div id="home" class="container tab-pane active ">
 
-						<form  method="post" action="User">
+						<form  method="post" action="Login">
 							<br>
 							<div class="form-group row">
 								<div class="col-md-4"></div>
@@ -109,6 +108,13 @@ if(attempts2){
 								<div class="col-md-4">
 									<input type="submit" class="btn btn-primary btn-lg btn-block "
 										value="Login" name="submit">
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+									<div> <a href="Logout">Logout</a></div>
 								</div>
 							</div>
 

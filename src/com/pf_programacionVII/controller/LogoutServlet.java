@@ -31,10 +31,11 @@ public class LogoutServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		HttpSession session = request.getSession(false);
-		if(session!=null){
+		if(session != null){
 
             session.invalidate();
-            session=null;
+            session = null;
+            System.out.println("Console: - Logout | Session:" + session);
         }
         request.getRequestDispatcher("login.jsp").forward(request,response);
 	}
