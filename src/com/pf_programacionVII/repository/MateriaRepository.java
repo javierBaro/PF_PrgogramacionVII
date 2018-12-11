@@ -35,6 +35,16 @@ public class MateriaRepository extends Repository<Materia> {
 	setParameters(parameters);
 	return getOne();
 	}
+	
+	public ArrayList<Materia> getMateriaByIdPlanEstudio(String procedure,int planEstudioId)
+	{
+	setStoreProcedure(procedure);
+	ArrayList<Object> parameters=new ArrayList<>();
+	parameters.add((Integer)planEstudioId);
+	setParameters(parameters);
+	return getMany();
+	}
+	
 	public void insertMateria(String procedure,String nombreMateria) {
 		setStoreProcedure(procedure);
 		ArrayList<Object> parameters=new ArrayList<>();

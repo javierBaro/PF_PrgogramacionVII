@@ -6,6 +6,7 @@ import com.pf_programacionVII.model.Materia;
 public interface MateriaService {
 	public ArrayList<Materia> getAllMateria() ;
 	public Materia getMateriaByidMateria(int idMateria);
+	public ArrayList<Materia> getMateriaByidPlanEstudio(int idPlanEstudio);
 	public void insertMateria(String materia);
 	public void updateMateria(Materia materia);
     public void deleteMateria(int idMateria);

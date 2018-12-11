@@ -37,6 +37,11 @@ public class MateriasServiceImpl implements MateriaService{
 		
 	}
 
+	@Override
+	public ArrayList<Materia> getMateriaByidPlanEstudio(int idPlanEstudio) {
+		return materiaRepository.getMateriaByIdPlanEstudio("Call GetMateriaByIdPlanEstudio(?)", idPlanEstudio);
+	}
+
 	
 
 }
