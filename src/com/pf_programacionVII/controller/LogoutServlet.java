@@ -1,6 +1,8 @@
 package com.pf_programacionVII.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,11 @@ import javax.servlet.http.HttpSession;
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	String 	alertClass 	= "alert alert-warning visible"; 
+	String 	alertMsg 	= "Fin de Session";
+	boolean attempts2 	= true;
+	
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,13 +38,21 @@ public class LogoutServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		HttpSession session = request.getSession(false);
+		
+/*		boolean attempts2 = (boolean)request.getAttribute("attempt");*/
 		if(session != null){
 
             session.invalidate();
             session = null;
-            System.out.println("Console: - Logout | Session:" + session);
+            System.out.println("Console: - LogoutServlet.java | Session:" + session);
         }
-        request.getRequestDispatcher("login.jsp").forward(request,response);
+		
+		request.setAttribute("alertClass", alertClass);
+		request.setAttribute("alertMsg", alertMsg);
+		request.setAttribute("attempt", attempts2);
+        //request.getRequestDispatcher("login.jsp").forward(request,response);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+        dispatcher.forward(request, response);
 	}
 
 	/**

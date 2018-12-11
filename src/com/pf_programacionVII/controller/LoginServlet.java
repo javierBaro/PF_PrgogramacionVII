@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 
 
-		HashMap<String , ArrayList<PlanEstudio>> hmPlanEstudio = new HashMap<>();
+		/*HashMap<String , ArrayList<PlanEstudio>> hmPlanEstudio = new HashMap<>();
 		
 		for(Carrera carrera : carreraService.getAllCarrera())
 		{	
@@ -62,19 +62,21 @@ public class LoginServlet extends HttpServlet {
 				plan.add(planEstudio);
 			
 			hmPlanEstudio.put(carrera.getNombre(),plan);
-		}
+		}*/
 		
 		
-		request.setAttribute("planEstudio", hmPlanEstudio);
+		/*request.setAttribute("planEstudio", hmPlanEstudio);*/
 		
 		// Testing Login Confirmation
-		request.setAttribute("alertClass", alertClass);
+		/*request.setAttribute("alertClass", alertClass);
 		request.setAttribute("alertMsg", alertMsg);
 		request.setAttribute("attempt", attempts2);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");*/
 		// Loading Login success
 		
-		//RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/dashboard.jsp");
+		User 	user 		= userService.getUsuarioByUsuario((String)request.getParameter("login_name"));
+		session.setAttribute("actualUser", user);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/dashboard.jsp");
   	  dispatcher.forward(request, response);
 	}
 
@@ -100,24 +102,24 @@ public class LoginServlet extends HttpServlet {
 
 		} finally {
 			// Console Logs for Login
-			System.out.println("Stage 0 - End of TryCatch: " + "Result: " + passTry);
+			System.out.println("Console: - LoginServlet.java | Stage 0 - End of TryCatch: " + "Result: " + passTry);
 			
 		}
 		
 		// Console Logs for Login
-		System.out.println("Stage 1 - Notificacion: " + alertMsg);
-		System.out.println("Stage 2 - Sent Data: " + "Username:" + request.getParameter("login_name") + " Password: " + request.getParameter("contrasena"));
+		System.out.println("Console: - LoginServlet.java | Stage 1 - Notificacion: " + alertMsg);
+		System.out.println("Console: - LoginServlet.java | Stage 2 - Sent Data: " + "Username:" + request.getParameter("login_name") + " Password: " + request.getParameter("contrasena"));
 		
       if(user!=null)
       {
     	  // Console Logs for Login
-    	  System.out.println("Stage 3 - Verification: User is Not Null");
-    	  System.out.println("Stage 4 - Requested Data: " + "ReturnUsername" + user.getUsuario() + " ReturnPassword: " + user.getContrasena());
+    	  System.out.println("Console: - LoginServlet.java | Stage 3 - Verification: User is Not Null");
+    	  System.out.println("Console: - LoginServlet.java | Stage 4 - Requested Data: " + "ReturnUsername" + user.getUsuario() + " ReturnPassword: " + user.getContrasena());
     	  
     	  if(user.getContrasena().equals(request.getParameter("contrasena"))) {
     		  // Console Logs for Login
-    		  System.out.println("Stage 5 - Authenticated: " + "Logged In");
-    		  System.out.println("Stage 6 - Call Materias with doGet: ");
+    		  System.out.println("Console: - LoginServlet.java | Stage 5 - Authenticated: " + "Logged In");
+    		  System.out.println("Console: - LoginServlet.java | Stage 6 - Call Materias with doGet: ");
     		  
     		  //Session Startup
     		  session =(HttpSession) request.getSession(true);
@@ -130,14 +132,14 @@ public class LoginServlet extends HttpServlet {
     		  doGet(request, response);
     	  }else {
     		  // Console Logs for Login
-    		  System.out.println("Stage 5 - Not Authenticated: Wrong Password");
+    		  System.out.println("Console: - LoginServlet.java | Stage 5 - Not Authenticated: Wrong Password");
 
     		  alertClass 	= "alert alert-danger visible";
         	  alertMsg 		= "Usuario y/o Contraseña incorrecta.";
     	  }
       }else {
     	  // Console Logs for Login
-    	  System.out.println("Stage 3 - Verification: No User Found");
+    	  System.out.println("Console: - LoginServlet.java | Stage 3 - Verification: No User Found");
     	  
       }
       
