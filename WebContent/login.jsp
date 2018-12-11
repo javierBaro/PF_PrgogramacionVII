@@ -6,6 +6,26 @@
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+	
+<%
+String alertClass = "alert alert-danger invisible"; 
+String alertMsg = "Bootup";
+boolean attempts2 = false;
+
+try{
+	attempts2 = (boolean)request.getAttribute("attempts2");
+} catch(Exception e){
+	attempts2 = false;
+}
+
+
+if(attempts2){
+	alertMsg = (String)request.getAttribute("alertMsg");
+	alertClass = (String)request.getAttribute("alertClass");
+	
+}
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +65,15 @@
 							<br>
 							<div class="form-group row">
 								<div class="col-md-4"></div>
-								<div class="col-md-6">
+								<div class="col-md-4">
+									<div class=<%= '"' + alertClass + '"' %> role="alert">
+										<%= alertMsg %>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
 									<label>Email / Usuario</label>
 									<div class="input-group">
 										<div class="input-group-prepend">
@@ -62,7 +90,7 @@
 
 							<div class="form-group row">
 								<div class="col-md-4"></div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<label>Contraseña</label>
 									<div class="input-group">
 										<div class="input-group-prepend">
@@ -78,7 +106,7 @@
 
 							<div class="form-group row">
 								<div class="col-md-4"></div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<input type="submit" class="btn btn-primary btn-lg btn-block "
 										value="Login" name="submit">
 								</div>
