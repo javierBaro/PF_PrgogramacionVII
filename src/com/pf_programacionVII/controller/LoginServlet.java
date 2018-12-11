@@ -137,7 +137,7 @@ public class LoginServlet extends HttpServlet {
 
     		  alertClass 	= "alert alert-danger visible";
 
-        	  alertMsg 		= "Usuario y/o Contraseï¿½a incorrecta.";
+        	  alertMsg 		= "Usuario y/o Contraseña incorrecta.";
 
     	  }
       }else {
