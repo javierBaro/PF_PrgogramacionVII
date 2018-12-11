@@ -8,7 +8,7 @@
 	pageEncoding="utf-8"%>
 	
 <%
-String alertClass 	= "alert alert-danger invisible"; 
+String alertClass 	= "alert alert-danger invisible d-none"; 
 String alertMsg 	= "Bootup";
 boolean attempts2;
 
@@ -21,7 +21,6 @@ try{
 if(attempts2){
 	alertMsg = (String)request.getAttribute("alertMsg");
 	alertClass = (String)request.getAttribute("alertClass");
-	
 }
 
 %>
@@ -97,7 +96,7 @@ if(attempts2){
 												aria-hidden="true"></i></span>
 										</div>
 										<input type="password" name="contrasena" class="form-control"
-											required="">
+											required>
 									</div>
 								</div>
 							</div>
@@ -199,13 +198,16 @@ if(attempts2){
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 	<%if(request.getAttribute("Message")!=null) 
 	{
 		%><script>alert('<%=request.getAttribute("Message")%>');</script><%
 	}
 	%>
+	<script>
+		$(".alert").delay(4000).slideUp(200, function() {
+		    $(this).alert('close');
+		});
+	</script>
 	<script src="static/confirm_password.js?=112"></script>
 </body>
 </html>
