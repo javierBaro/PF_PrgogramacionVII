@@ -72,8 +72,7 @@ public class UserServiceImpl implements UserService {
 	public ArrayList<String> getStringFathersAndChildTree(User actualUser) {
 		ArrayList<String> arrayList =new ArrayList<>();
 		Tree tree = new Tree();
-		System.out.println(actualUser);
-		String carrera = carreraService.getCarreraByidPlanEstudio(actualUser.getPlanStudioId()).getNombre() ;
+		String carrera = carreraService.getCarreraByidPlanEstudio(actualUser.getPlanStudioId())	.getNombre() ;
 		arrayList.add(tree.getStringFathersAndChildTree(actualUser, carrera));
 		arrayList.add(tree.getStringNoRalizado());
 		return arrayList;
@@ -89,10 +88,7 @@ public class UserServiceImpl implements UserService {
 	public void UpdateUsuariosMaterias(ArrayList<UsuariosMaterias> usuariosMaterias)
 	{
 		for(UsuariosMaterias usuariosMateriasItem:usuariosMaterias)
-		{System.out.println("idUsuarioMateria: "+usuariosMateriasItem.getId()+
-				"idUsuario: "+usuariosMateriasItem.getUsuarioId()+
-				"idJoin: "+usuariosMateriasItem.getPlanEstudioMateriasId()+
-				"idRealizado: "+usuariosMateriasItem.getRealizado());
+		{
 			usuariosMateriasService.updatetUsuariosMaterias(usuariosMateriasItem);
 		}
 	}

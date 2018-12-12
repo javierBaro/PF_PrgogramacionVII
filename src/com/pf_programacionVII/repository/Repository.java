@@ -69,7 +69,6 @@ public abstract class Repository<T> {
 			al.clear();
 			stmt = conn.conectarMySQL().prepareCall(storeProcedure);
 			setParameterForProcedure();
-			System.out.println("get Many: "+stmt);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				al.add(getObject());
@@ -91,7 +90,7 @@ public abstract class Repository<T> {
 			stmt = conn.conectarMySQL().prepareCall(storeProcedure);
 			setParameterForProcedure();
 			rs = stmt.executeQuery();
-			System.out.println("get One: "+stmt);
+
 			while (rs.next()) {
 				return getObject();
 			}
@@ -120,7 +119,6 @@ public abstract class Repository<T> {
 			stmt = conn.conectarMySQL().prepareCall(storeProcedure);
 			setParameterForProcedure();
 			rs = stmt.executeQuery();	
-			System.out.println("Set : "+stmt);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

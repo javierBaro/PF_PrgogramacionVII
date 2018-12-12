@@ -49,8 +49,7 @@ public class RegisterServlet extends HttpServlet {
 		else
 			request.setAttribute("Message", "Ya existe un usuario con ese nombre de usuario");
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login");
-    	  dispatcher.forward(request, response);
+		response.sendRedirect("Login");
 	}
 
 }

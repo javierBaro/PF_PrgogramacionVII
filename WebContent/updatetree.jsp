@@ -36,7 +36,7 @@
 			materiaRealizadas =(ArrayList<MateriaRealizada>) request.getAttribute("checklist");
 		}
 	%>
-    <canvas id="canvas1" width="1000" height="300"></canvas>
+       <canvas id="canvas1" width="3500" height="1000"></canvas>
 <form action="UpdateTree" method="post">
 <% 
 

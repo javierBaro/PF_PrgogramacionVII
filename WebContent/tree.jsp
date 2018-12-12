@@ -29,7 +29,7 @@
 			noRealizado = request.getAttribute("noRealizado").toString();
 		}
 	%>
-    <canvas id="canvas1" width="1000" height="300"></canvas>
+    <canvas id="canvas1" width="3500" height="1000"></canvas>
 
     <script type="text/javascript">
    window.addEventListener("load", func);

@@ -35,6 +35,7 @@ public class UserRepository extends Repository<User> {
 		ArrayList<Object> parameters = new ArrayList<>();
 		parameters.add(usuario);
 		setParameters(parameters);
+		
 		return getOne();
 	}
 

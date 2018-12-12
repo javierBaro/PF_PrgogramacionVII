@@ -45,6 +45,10 @@ public class JoinPlanEstudioMateriasServiceImpl implements JoinPlanEstudioMateri
 		this.join.deleteJoin("deletePlanEstudioMaterias(?)", idJoin);
 		
 	}
+	@Override
+	public JoinPlanEstudioMaterias getJoinByIdMateriaAndIdPlanEstudio(int idMateria, int idPlanEstudio) {
+		return join.getJoinByIdMateriaAndIdPlanEstudio("Call GetPlanEstudioMateriasByIdMateriaAndIdPlanEstudio(?,?)", idMateria, idPlanEstudio);
+	}
 
 
 	
