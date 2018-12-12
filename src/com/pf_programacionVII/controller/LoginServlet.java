@@ -52,8 +52,8 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-		HashMap<String , ArrayList<PlanEstudio>> hmPlanEstudio = new HashMap<>();
+			 
+HashMap<String , ArrayList<PlanEstudio>> hmPlanEstudio = new HashMap<>();
 		
 		for(Carrera carrera : carreraService.getAllCarrera())
 		{	
