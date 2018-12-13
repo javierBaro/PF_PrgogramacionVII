@@ -51,8 +51,8 @@ public class LogoutServlet extends HttpServlet {
 		request.setAttribute("alertMsg", alertMsg);
 		request.setAttribute("attempt", attempts2);
         //request.getRequestDispatcher("login.jsp").forward(request,response);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("Login");
+
 	}
 
 	/**

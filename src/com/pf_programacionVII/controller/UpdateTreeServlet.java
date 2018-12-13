@@ -68,10 +68,6 @@ public class UpdateTreeServlet extends HttpServlet {
 				usuariosMateriasDb.setRealizado(0);
 				usuariosMaterias.add(usuariosMateriasDb);
 			}	
-			System.out.println("idUsuarioMateria: "+usuariosMateriasDb.getId()+
-					"idUsuario: "+usuariosMateriasDb.getUsuarioId()+
-					"idJoin: "+usuariosMateriasDb.getPlanEstudioMateriasId()+
-					"idRealizado: "+usuariosMateriasDb.getRealizado());
 					
 		}
 	

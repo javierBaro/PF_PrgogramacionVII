@@ -59,7 +59,7 @@ if(attempts2){
 				<div class="tab-content">
 					<div id="home" class="container tab-pane active ">
 
-						<form  method="post" action="Login">
+						<form  method="post" action="User">
 							<br>
 							<div class="form-group row">
 								<div class="col-md-4"></div>
@@ -110,12 +110,7 @@ if(attempts2){
 								</div>
 							</div>
 							
-							<div class="form-group row">
-								<div class="col-md-4"></div>
-								<div class="col-md-4">
-									<div> <a href="Logout">Logout</a></div>
-								</div>
-							</div>
+
 
 						</form>
 					</div>

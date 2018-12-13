@@ -134,7 +134,7 @@ public class Tree extends Materia{
 
 		if(usuariosMaterias.getRealizado()==0)
 		{
-		    materiaRealizadas.add(new MateriaRealizada(getId(),getNombre().replaceAll("\n", ""),false));
+		    materiaRealizadas.add(new MateriaRealizada(getId(),getNombre(),false));
 			strNoRealizadas ="'"+getNombre()+"'";
 		}
 		else
