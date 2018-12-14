@@ -171,7 +171,7 @@ if(attempts2){
 										 for(Map.Entry<String,ArrayList<PlanEstudio>> pair : hm.entrySet())
 										 {
 										       %>
-										<option disabled>--<%=pair.getKey()%>--</option>
+										<option disabled>--<%=pair.getKey().replaceAll("\\\\n","")%>--</option>
 										<%
 										       for(PlanEstudio plan : pair.getValue())
 										       {

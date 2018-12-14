@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository =new UserRepository();
 	private JoinPlanEstudioMateriasServiceImpl join =new JoinPlanEstudioMateriasServiceImpl();
 	private UsuariosMateriasServiceImpl usuariosMateriasService = new UsuariosMateriasServiceImpl();
-	private CarreraServiceImpl carreraService= new CarreraServiceImpl();
+	
 	
 	
 	
@@ -71,16 +71,14 @@ public class UserServiceImpl implements UserService {
 	}
 	public ArrayList<String> getStringFathersAndChildTree(User actualUser) {
 		ArrayList<String> arrayList =new ArrayList<>();
-		Tree tree = new Tree();
-		String carrera = carreraService.getCarreraByidPlanEstudio(actualUser.getPlanStudioId())	.getNombre() ;
-		arrayList.add(tree.getStringFathersAndChildTree(actualUser, carrera));
+		Tree tree = new Tree(actualUser);		
+		arrayList.add(tree.getStringFathersAndChildTree());
 		arrayList.add(tree.getStringNoRalizado());
 		return arrayList;
 	}
 	public ArrayList<MateriaRealizada> getMateriaRelizada(User actualUser) {
-		String carrera = carreraService.getCarreraByidPlanEstudio(actualUser.getPlanStudioId()).getNombre() ;
-		Tree tree = new Tree();
-		tree.getStringFathersAndChildTree(actualUser,carrera);
+		Tree tree = new Tree(actualUser);
+		tree.getStringFathersAndChildTree();
 		Set<String> nameSet = new HashSet<>();	 
 		return (ArrayList<MateriaRealizada>) tree.getMateriaRealizadas().stream().filter(e -> nameSet.add(e.getNombre())).collect(Collectors.toList());
 	}
@@ -91,6 +89,15 @@ public class UserServiceImpl implements UserService {
 		{
 			usuariosMateriasService.updatetUsuariosMaterias(usuariosMateriasItem);
 		}
+	}
+	
+	public ArrayList<Integer> getCountRealizadasAndNoRealizadas(User actualUser) {
+		ArrayList<Integer> arrayList =new ArrayList<>();
+		Tree tree = new Tree(actualUser);
+		tree.getStringFathersAndChildTree();
+		arrayList.add(tree.getCountRealizadas());
+		arrayList.add(tree.getCountNoRealizadas());		
+		return arrayList;
 	}
 
 

@@ -13,6 +13,8 @@
 
 <%
 		String tree = "", noRealizado = "";
+        int countNoRealizadas=0,countRealizadas=0;
+        double porcentajeNoRealizadas=0,porcentajeRealizadas=0;
 		if (request.getAttribute("tree") != null) {
 			tree = request.getAttribute("tree").toString();
 		}
@@ -20,6 +22,14 @@
 			noRealizado = request.getAttribute("noRealizado").toString();
 		}
 		
+		if (request.getAttribute("countNoRealizadas") != null) {
+			countNoRealizadas = (Integer)request.getAttribute("countNoRealizadas");
+		}
+		if (request.getAttribute("countRealizadas") != null) {
+			countRealizadas = (Integer)request.getAttribute("countRealizadas");
+		}
+		porcentajeNoRealizadas= (countNoRealizadas*100/(countNoRealizadas+countRealizadas));
+		porcentajeRealizadas= (countRealizadas*100/(countNoRealizadas+countRealizadas));
 		//response.sendRedirect("/User");
 	%>
 <!DOCTYPE html>
@@ -577,23 +587,23 @@
                                           <div class="chart-info__left">
                                               <div class="chart-note">
                                                   <span class="dot dot--blue"></span>
-                                                  <span>products</span>
+                                                  <span>Realizadas</span>
                                               </div>
                                               <div class="chart-note mr-0">
                                                   <span class="dot dot--green"></span>
-                                                  <span>services</span>
+                                                  <span>No Realizadas</span>
                                               </div>
                                           </div>
                                           <div class="chart-info__right">
                                               <div class="chart-statis">
                                                   <span class="index incre">
-                                                      <i class="zmdi zmdi-long-arrow-up"></i>25%</span>
-                                                  <span class="label">products</span>
+                                                      <i class="zmdi zmdi-long-arrow-up"></i><%=porcentajeRealizadas%>%</span>
+                                                  <span class="label">Realizadas</span>
                                               </div>
                                               <div class="chart-statis mr-0">
                                                   <span class="index decre">
-                                                      <i class="zmdi zmdi-long-arrow-down"></i>10%</span>
-                                                  <span class="label">services</span>
+                                                      <i class="zmdi zmdi-long-arrow-down"></i><%=porcentajeNoRealizadas%>%</span>
+                                                  <span class="label">No Realizadas</span>
                                               </div>
                                           </div>
                                       </div>

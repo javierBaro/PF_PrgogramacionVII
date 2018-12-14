@@ -30,8 +30,7 @@ import com.pf_programacionVII.service.UserServiceImpl;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        PlanEstudioServiceImpl planEstudioService = new PlanEstudioServiceImpl();
-       CarreraServiceImpl carreraService= new CarreraServiceImpl();
-       
+       CarreraServiceImpl carreraService= new CarreraServiceImpl();     
 		JoinPlanEstudioMateriasServiceImpl join = new JoinPlanEstudioMateriasServiceImpl();
 		CarreraServiceImpl carreraServiceImpl = new CarreraServiceImpl();
 		String userinfo;
@@ -52,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 			for(PlanEstudio planEstudio : planEstudioService.getPlanEstudioByidCarrera(carrera.getId()))
 				plan.add(planEstudio);
 			
-			hmPlanEstudio.put(carrera.getNombre(),plan);
+			hmPlanEstudio.put(carrera.getNombre().replaceAll("\\\\n", ""),plan);
 		}
 		request.setAttribute("planEstudio", hmPlanEstudio);
 		
@@ -62,7 +61,6 @@ public class LoginServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		
 	}
+
 }
