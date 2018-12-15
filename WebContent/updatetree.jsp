@@ -429,7 +429,7 @@ for(MateriaRealizada materiaRealizada : materiaRealizadas){
                                       <h3 class="title-3 tm-b-5">Materias</h3>
                                       <div class="row no-gutters">
                                           <div class="col-xl-12 materiaTreeScroll">
-												<canvas id="canvas1" width="2500" height="900"></canvas>
+												<canvas id="canvas1" width="3000" height="900"></canvas>
                                           </div>
                                       </div>
                                   </div>

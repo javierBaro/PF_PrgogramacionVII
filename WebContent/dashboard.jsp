@@ -330,7 +330,7 @@
                           </div>
                       </div>
                       <div class="row m-t-25">
-	                      <div class="col-md col-lg" id="userStats">
+	                      <div class="col-md col-lg" id="userStats" style="display: none;">
 	                          <div class="col-sm-6 col-lg-3">
 	                              <div class="overview-item overview-item--c1">
 	                                  <div class="overview__inner">
@@ -412,7 +412,7 @@
                                       <h3 class="title-3 tm-b-5">Diagrama de Plan</h3>
                                       <div class="row no-gutters">
                                           <div class="col-xl-12 materiaTreeScroll">
-												<canvas id="canvas1" width="2500" height="900"></canvas>
+												<canvas id="canvas1" width="3000" height="900"></canvas>
                                           </div>
                                       </div>
                                   </div>
