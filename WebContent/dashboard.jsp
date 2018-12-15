@@ -412,7 +412,7 @@
                                       <h3 class="title-3 tm-b-5">Diagrama de Plan</h3>
                                       <div class="row no-gutters">
                                           <div class="col-xl-12 materiaTreeScroll">
-												<canvas id="canvas1" width="2000" height="900"></canvas>
+												<canvas id="canvas1" width="2500" height="900"></canvas>
                                           </div>
                                       </div>
                                   </div>
