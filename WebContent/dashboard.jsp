@@ -339,7 +339,7 @@
 	                                              <i class="zmdi zmdi-puzzle-piece"></i>
 	                                          </div>
 	                                          <div class="text">
-	                                              <h2><%= countNoRealizadas + countRealizadas %></h2>
+	                                              <h2><%= "Hello" %></h2>
 	                                              <span>Materias</span>
 	                                          </div>
 	                                      </div>
@@ -357,7 +357,7 @@
 	                                              <i class="zmdi zmdi-spellcheck"></i>
 	                                          </div>
 	                                          <div class="text">
-	                                              <h2><%= countRealizadas %></h2>
+	                                              <h2><%= countNoRealizadas %></h2>
 	                                              <span>Materias cursadas</span>
 	                                          </div>
 	                                      </div>
@@ -375,7 +375,7 @@
 	                                              <i class="zmdi zmdi-layers-off"></i>
 	                                          </div>
 	                                          <div class="text">
-	                                              <h2><%= countNoRealizadas %></h2>
+	                                              <h2><%= countRealizadas %></h2>
 	                                              <span>Materias Pendientes</span>
 	                                          </div>
 	                                      </div>
