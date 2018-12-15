@@ -590,7 +590,7 @@
 			  datasets: [
 				{
 				  label: "My First dataset",
-				  data: [<%= porcentajeNoRealizadas %>, <%= porcentajeRealizadas%>],
+				  data: [<%= porcentajeRealizadas%>,<%= porcentajeNoRealizadas %>],
 				  backgroundColor: [
 					'#00b5e9',
 					'#fa4251'
@@ -609,8 +609,8 @@
 				}
 			  ],
 			  labels: [
-				'Products',
-				'Services'
+				'No Realizadas',
+				'Realizadas'
 			  ]
 			},
 			options: {

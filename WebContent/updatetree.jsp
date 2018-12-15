@@ -529,9 +529,9 @@ for(MateriaRealizada materiaRealizada : materiaRealizadas){
 		<div class="au-task__item au-task__item--warning js-load-item">
                                               <div class="au-task__item-inner">
                                                   <h5 class="task">
-                                                      <a href="#"><input type="checkbox" name="<%=materiaRealizada.getId()%>" checked><%=materiaRealizada.getNombre()%></a>
+                                                      <a href=""><input type="checkbox" name="<%=materiaRealizada.getId()%>" checked><%=materiaRealizada.getNombre()%></a>
                                                   </h5>
-                                                  <span class="time">11:00 AM</span>
+                                                  <span class="time">Materia</span>
                                               </div>
                                           </div>
 		<%
@@ -543,9 +543,9 @@ for(MateriaRealizada materiaRealizada : materiaRealizadas){
 	<div class="au-task__item au-task__item--warning js-load-item">
                                               <div class="au-task__item-inner">
                                                   <h5 class="task">
-                                                      <a href="#"><input type="checkbox" name="<%=materiaRealizada.getId()%>" ><%=materiaRealizada.getNombre()%></a>
+                                                      <a href=""><input type="checkbox" name="<%=materiaRealizada.getId()%>" ><%=materiaRealizada.getNombre()%></a>
                                                   </h5>
-                                                  <span class="time">11:00 AM</span>
+                                                  <span class="time">Materia</span>
                                               </div>
                                           </div>
 	<%
