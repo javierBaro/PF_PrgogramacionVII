@@ -336,7 +336,7 @@
 	                                  <div class="overview__inner">
 	                                      <div class="overview-box clearfix">
 	                                          <div class="icon">
-	                                              <i class="zmdi zmdi-account-o"></i>
+	                                              <i class="zmdi zmdi-puzzle-piece"></i>
 	                                          </div>
 	                                          <div class="text">
 	                                              <h2><%= countNoRealizadas + countRealizadas %></h2>
@@ -354,7 +354,7 @@
 	                                  <div class="overview__inner">
 	                                      <div class="overview-box clearfix">
 	                                          <div class="icon">
-	                                              <i class="zmdi zmdi-shopping-cart"></i>
+	                                              <i class="zmdi zmdi-spellcheck"></i>
 	                                          </div>
 	                                          <div class="text">
 	                                              <h2><%= countRealizadas %></h2>
@@ -372,7 +372,7 @@
 	                                  <div class="overview__inner">
 	                                      <div class="overview-box clearfix">
 	                                          <div class="icon">
-	                                              <i class="zmdi zmdi-calendar-note"></i>
+	                                              <i class="zmdi zmdi-layers-off"></i>
 	                                          </div>
 	                                          <div class="text">
 	                                              <h2><%= countNoRealizadas %></h2>
