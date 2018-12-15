@@ -609,8 +609,8 @@
 				}
 			  ],
 			  labels: [
-				'Realizadas',
-				'No Realizadas'
+				'No Realizadas',
+				'Realizadas'
 			  ]
 			},
 			options: {
