@@ -339,7 +339,7 @@
 	                                              <i class="zmdi zmdi-puzzle-piece"></i>
 	                                          </div>
 	                                          <div class="text">
-	                                              <h2><%= "Hello" %></h2>
+	                                              <h2><%= countNoRealizadas + countRealizadas %></h2>
 	                                              <span>Materias</span>
 	                                          </div>
 	                                      </div>
@@ -590,7 +590,7 @@
 			  datasets: [
 				{
 				  label: "My First dataset",
-				  data: [<%= porcentajeRealizadas%>,<%= porcentajeNoRealizadas %>],
+				  data: [<%= porcentajeNoRealizadas %>,<%= porcentajeRealizadas%>],
 				  backgroundColor: [
 					'#00b5e9',
 					'#fa4251'
@@ -609,8 +609,8 @@
 				}
 			  ],
 			  labels: [
-				'No Realizadas',
-				'Realizadas'
+				'Realizadas',
+				'No Realizadas'
 			  ]
 			},
 			options: {
