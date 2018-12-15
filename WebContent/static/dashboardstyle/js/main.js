@@ -333,7 +333,7 @@
 
     // Percent Chart
     var ctx = document.getElementById("percent-chart");
-    if (ctx) {
+    /*if (ctx) {
       ctx.height = 280;
       var myChart = new Chart(ctx, {
         type: 'doughnut',
@@ -384,7 +384,7 @@
           }
         }
       });
-    }
+    }*/
 
   } catch (error) {
     console.log(error);
