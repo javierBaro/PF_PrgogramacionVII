@@ -330,7 +330,7 @@
                           </div>
                       </div>
                       <div class="row m-t-25">
-	                      <div class="col-md col-lg" id="userStats" style="display: none;">
+	                      <div class="col-md col-lg" id="userStats" style="display: flex;">
 	                          <div class="col-sm-6 col-lg-3">
 	                              <div class="overview-item overview-item--c1">
 	                                  <div class="overview__inner">
