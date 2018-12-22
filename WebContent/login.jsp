@@ -13,14 +13,14 @@ String alertMsg 	= "Bootup";
 boolean attempts2;
 
 try{
-	attempts2 = (boolean)request.getAttribute("attempt");
+	attempts2 = (boolean)session.getAttribute("attempt");
 } catch(Exception e){
 	attempts2 = false;
 }
 
 if(attempts2){
-	alertMsg = (String)request.getAttribute("alertMsg");
-	alertClass = (String)request.getAttribute("alertClass");
+	alertMsg = (String)session.getAttribute("alertMsg");
+	alertClass = (String)session.getAttribute("alertClass");
 }
 
 %>

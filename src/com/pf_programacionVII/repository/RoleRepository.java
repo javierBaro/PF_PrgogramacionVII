@@ -28,6 +28,7 @@ public class RoleRepository extends Repository<Role> {
 		setStoreProcedure(procedure);
 		return getMany();
 	}
+	
 	public Role getRoleById(String procedure,int roleId)
 	{
 	setStoreProcedure(procedure);

@@ -1,40 +1,41 @@
 package com.pf_programacionVII.connection;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class ConnectionManager {
 
-	// Librería de MySQL
-	private String driver = "com.mysql.cj.jdbc.Driver";
+	Properties prop =new Properties();
+	private String driver ;
+	private String url ;
+	private String username ;
+	private String password ;
+	private static Connection conn = null;
+	private InputStream inputStream;
 
-	// Nombre de la base de datos
-	private String database = "materias_u"; 
-
-	// Host
-	private String hostname = "10.9.121.117";
-
-	// Puerto
-	private String port = "3306";
-
-	// Ruta de nuestra base de datos (desactivamos el uso de SSL con
-	// "?useSSL=false")
-	private String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false";
-
-	// Nombre de usuario
-	private String username = "connect";
-
-	// Clave de usuario
-	private String password = "Eduardo*123";
-
-	private Connection conn = null;
-
-	public Connection conectarMySQL() {
+	
+	public Connection conectarMySQL()  {
 		try {
+
+		    inputStream = getClass().getClassLoader().getResourceAsStream("config.properties");
+		    if (inputStream != null) {
+				prop.load(inputStream);
+			} else {
+				throw new FileNotFoundException("property file '" + prop + "' not found in the classpath");
+			}
+			
+			driver=prop.getProperty("jdbc.driver");
+			url=prop.getProperty("jdbc.url");
+			username=prop.getProperty("jdbc.user");
+			password=prop.getProperty("jdbc.password");
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, password);
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException | IOException e) {
 			e.printStackTrace();
 		}
 		return conn;

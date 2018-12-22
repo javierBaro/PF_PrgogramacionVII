@@ -39,12 +39,13 @@ public class UpdateTreeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 session =(HttpSession) request.getSession(true); 
 		User actualUser=(User) session.getAttribute("actualUser");
-		ArrayList<String> arrayList = userService.getStringFathersAndChildTree(actualUser);
+		ArrayList<Object> arrayListHelper = userService.getStringFathersAndChildTree(actualUser);
+		ArrayList<String> arrayListTree =(ArrayList<String>) arrayListHelper.get(0);
 		request.setAttribute("checklist", userService.getMateriaRelizada(actualUser));
 		
 		
-		request.setAttribute("tree", arrayList.get(0));
-		request.setAttribute("noRealizado",arrayList.get(1) );
+		request.setAttribute("tree", arrayListTree.get(0));
+		request.setAttribute("noRealizado",arrayListTree.get(1) );
 		 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/updatetree.jsp");
    	  dispatcher.forward(request, response);
 	}

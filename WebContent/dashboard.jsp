@@ -428,11 +428,11 @@
                                           <div class="chart-info__left">
                                               <div class="chart-note">
                                                   <span class="dot dot--blue"></span>
-                                                  <span>Realizadas</span>
+                                                  <span>No Realizadas</span>
                                               </div>
                                               <div class="chart-note mr-0">
                                                   <span class="dot dot--green"></span>
-                                                  <span>No Realizadas</span>
+                                                  <span> Realizadas</span>
                                               </div>
                                           </div>
                                           <div class="chart-info__right">
@@ -457,17 +457,17 @@
                           <div class="col-lg-6">
                               <div class="au-card chart-percent-card">
                                   <div class="au-card-inner">
-                                      <h3 class="title-2 tm-b-5">Distribucion de Materias</h3>
+                                      <h3 class="title-2 tm-b-5">% de Materias Realizadas y No Realizadas</h3>
                                       <div class="row no-gutters">
                                           <div class="col-xl-6">
                                               <div class="chart-note-wrap">
                                                   <div class="chart-note mr-0 d-block">
                                                       <span class="dot dot--blue"></span>
-                                                      <span>No Realizadas</span>
+                                                      <span>Realizadas</span>
                                                   </div>
                                                   <div class="chart-note mr-0 d-block">
                                                       <span class="dot dot--red"></span>
-                                                      <span>Realizadas</span>
+                                                      <span> No Realizadas</span>
                                                   </div>
                                               </div>
                                           </div>
@@ -589,7 +589,7 @@
 			data: {
 			  datasets: [
 				{
-				  label: "My First dataset",
+				  label: "Porcentaje de Materias Realizadas y No Realizadas",
 				  data: [<%= porcentajeNoRealizadas %>,<%= porcentajeRealizadas%>],
 				  backgroundColor: [
 					'#00b5e9',
@@ -609,8 +609,8 @@
 				}
 			  ],
 			  labels: [
-				'No Realizadas',
-				'Realizadas'
+				'Realizadas',
+				'No Realizadas'
 			  ]
 			},
 			options: {

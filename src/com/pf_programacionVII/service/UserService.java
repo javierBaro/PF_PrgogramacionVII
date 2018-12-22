@@ -9,6 +9,7 @@ public interface UserService {
 	
 	public ArrayList<User> getAllUsuarios() ;
 	public User getUsuarioByUsuario(String usuario);
+	public User getUsuarioByUsuarioAndContrasena(String usuario,String contrasena);
 	public User getUsuarioById(int idUsuario);
 	public void insertUser(User usuario);
 	public boolean insertAndReplicate(User usuario);

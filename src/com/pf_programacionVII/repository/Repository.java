@@ -17,24 +17,6 @@ public abstract class Repository<T> {
 	protected ResultSet rs;
 	private CallableStatement stmt;
 
-	protected void stmtClose() {
-		if (stmt != null) {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	protected void resultSetClose() {
-		if (rs != null) {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
 
 	protected abstract T getObject();
 
@@ -125,6 +107,25 @@ public abstract class Repository<T> {
 			resultSetClose();
 			stmtClose();
 			conn.cerrarMySQL();
+		}
+	}
+	
+	protected void stmtClose() {
+		if (stmt != null) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	protected void resultSetClose() {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

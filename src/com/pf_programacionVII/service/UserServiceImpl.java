@@ -32,6 +32,10 @@ public class UserServiceImpl implements UserService {
 	public User getUsuarioByUsuario(String usuario) {
 		return userRepository.getUserByUsuario("CALL GetUsuarioByUsuario(?)", usuario);
 	}
+	@Override
+	public User getUsuarioByUsuarioAndContrasena(String usuario,String contrasena) {
+		return userRepository.getUserByUsuarioAndContrasena("CALL GetUsuarioByUsuarioAndContrasena(?,?)", usuario,contrasena);
+	}
 
 	@Override
 	public void insertUser( User usuario) {
@@ -69,12 +73,21 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;	
 	}
-	public ArrayList<String> getStringFathersAndChildTree(User actualUser) {
+	public ArrayList<Object> getStringFathersAndChildTree(User actualUser) {
+		ArrayList<Object> collectionHelper =new  ArrayList<Object>();
+		
 		ArrayList<String> arrayList =new ArrayList<>();
 		Tree tree = new Tree(actualUser);		
 		arrayList.add(tree.getStringFathersAndChildTree());
 		arrayList.add(tree.getStringNoRalizado());
-		return arrayList;
+		ArrayList<Integer> arrayList2 =new ArrayList<>();
+		arrayList2.add(tree.getCountRealizadas());
+		arrayList2.add(tree.getCountNoRealizadas());
+		
+		collectionHelper.add(arrayList);
+		collectionHelper.add(arrayList2);
+		
+		return collectionHelper;
 	}
 	public ArrayList<MateriaRealizada> getMateriaRelizada(User actualUser) {
 		Tree tree = new Tree(actualUser);
@@ -91,14 +104,4 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
-	public ArrayList<Integer> getCountRealizadasAndNoRealizadas(User actualUser) {
-		ArrayList<Integer> arrayList =new ArrayList<>();
-		Tree tree = new Tree(actualUser);
-		tree.getStringFathersAndChildTree();
-		arrayList.add(tree.getCountRealizadas());
-		arrayList.add(tree.getCountNoRealizadas());		
-		return arrayList;
-	}
-
-
 }

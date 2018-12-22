@@ -12,7 +12,7 @@ import com.pf_programacionVII.service.UsuariosMateriasServiceImpl;
 public class Tree extends Materia{
 
 
-	private ArrayList<Tree> children;
+	//private ArrayList<Tree> children;
 	private JoinPlanEstudioMateriasServiceImpl join = new JoinPlanEstudioMateriasServiceImpl();
 	private JoinPlanEstudioMateriasServiceImpl join2 = new JoinPlanEstudioMateriasServiceImpl();
 	private MateriasServiceImpl materiasService = new MateriasServiceImpl();
@@ -106,6 +106,7 @@ this.actualUser=actualUser;
 		this.materiaRealizadas = materiaRealizadas;
 	}
 	public String getStringFathersAndChildTree() {
+		final long startTime = System.nanoTime()/1000000000;
 		int planEstudioId= actualUser.getPlanStudioId();
 		String carrera = carreraService.getCarreraByidPlanEstudio(actualUser.getPlanStudioId()).getNombre();
 		strTree="";
@@ -132,6 +133,9 @@ this.actualUser=actualUser;
              
       }
              sinRequisito= "['"+carrera+"','SIN REQUISITOS',"+sinRequisito+"],";
+     		final long endTime = System.nanoTime()/1000000000;
+    	  	System.out.println("doGetUserServlet(Login)--Start--: "+startTime+ " --End--: "+endTime+"--Elapse Time--: "+(endTime-startTime)); 
+
       return str+sinRequisito;
 	}
 	
@@ -170,9 +174,9 @@ this.actualUser=actualUser;
 				tree= newTree.getStringChildTree();	
 				strTree += "['"+getNombre()+"','"+newTree.getStrMateria()+"'],";
                 strTree += tree.getStrTree(); 
-                materiaRealizadas.addAll(newTree.getMateriaRealizadas());
+                materiaRealizadas.addAll(newTree.getMateriaRealizadas());                
                 countNoRealizadas+=newTree.countNoRealizadas;
-                countRealizadas+=newTree.countRealizadas;           
+                countRealizadas+=newTree.countRealizadas;                          
                 strNoRealizadas +=","+newTree.getStrNoRealizadas();
            
 			}	

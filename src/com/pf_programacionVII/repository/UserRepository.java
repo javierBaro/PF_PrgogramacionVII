@@ -38,6 +38,15 @@ public class UserRepository extends Repository<User> {
 		
 		return getOne();
 	}
+	public User getUserByUsuarioAndContrasena(String procedure, String usuario,String contrasena) {
+		setStoreProcedure(procedure);
+		ArrayList<Object> parameters = new ArrayList<>();
+		parameters.add(usuario);
+		parameters.add(contrasena);
+		setParameters(parameters);
+		
+		return getOne();
+	}
 
 	public User getUserById(String procedure, int usuarioId) {
 		setStoreProcedure(procedure);

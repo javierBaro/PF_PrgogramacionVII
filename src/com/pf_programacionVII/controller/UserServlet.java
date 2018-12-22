@@ -42,11 +42,16 @@ public class UserServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		session = (HttpSession) request.getSession(true);
 		User actualUser =(User)session.getAttribute("actualUser");
-		ArrayList<String> arrayListTree = userService.getStringFathersAndChildTree(actualUser);
-		ArrayList<Integer> arrayListCount = userService.getCountRealizadasAndNoRealizadas(actualUser);
-
+		
+		
+		ArrayList<Object> arrayListHelper = userService.getStringFathersAndChildTree(actualUser);
+		ArrayList<String> arrayListTree =(ArrayList<String>) arrayListHelper.get(0);
+		ArrayList<Integer> arrayListCount =(ArrayList<Integer>) arrayListHelper.get(1);
+		
 		request.setAttribute("tree", arrayListTree.get(0));
 		request.setAttribute("noRealizado",arrayListTree.get(1) );
 		
@@ -55,83 +60,43 @@ public class UserServlet extends HttpServlet {
 		
 	  RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/dashboard.jsp");
   	  dispatcher.forward(request, response);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-				User 	user 		= userService.getUsuarioByUsuario((String)request.getParameter("login_name"));
-				String 	passTry 	= "End";
-				String 	redirectURL = "/Login";
-				
+		String 	passTry= "End";
+		String alertClass= "";
+		String alertMsg="";
+		session =(HttpSession) request.getSession(true);
 				// Exception Catching for User Login
 				try {
-					passTry 	= "Pass";
-					userinfo 	= userService.getUsuarioByUsuario(request.getParameter("login_name")).toString();
 					
+					User user = userService.getUsuarioByUsuarioAndContrasena((String)request.getParameter("login_name"),(String)request.getParameter("contrasena"));	
+					if(user!=null)
+				      { 
+				    		  //Session Startup
+				    		  session.setAttribute("actualUser", user);
+				    		  
+				      		// Loading Login success
+				      		doGet(request,response);
+				    	  }else {
+				        	  throw new Exception();
+				    	  }
+				      
 				} catch (Exception e) {
 					alertClass 	= "alert alert-danger visible";
 					alertMsg 	= "Usuario no encontrado.";
 					passTry 	= "PassTry: Failed. No User Found.";
-
-				} finally {
-					// Console Logs for Login
-					System.out.println("Console: - LoginServlet.java | Stage 0 - End of TryCatch: " + "Result: " + passTry);
 					
+					session.setAttribute("alertClass", alertClass);
+				      session.setAttribute("alertMsg", alertMsg);
+				      session.setAttribute("attempt", attempts2);
+				      
+				     response.sendRedirect("Login");
+
 				}
 				
-				// Console Logs for Login
-				System.out.println("Console: - LoginServlet.java | Stage 1 - Notificacion: " + alertMsg);
-				System.out.println("Console: - LoginServlet.java | Stage 2 - Sent Data: " + "Username:" + request.getParameter("login_name") + " Password: " + request.getParameter("contrasena"));
-				
-		      if(user!=null)
-		      {
-		    	  // Console Logs for Login
-		    	  System.out.println("Console: - LoginServlet.java | Stage 3 - Verification: User is Not Null");
-		    	  System.out.println("Console: - LoginServlet.java | Stage 4 - Requested Data: " + "ReturnUsername" + user.getUsuario() + " ReturnPassword: " + user.getContrasena());
-		    	  
-		    	  if(user.getContrasena().equals(request.getParameter("contrasena"))) {
-		    		  // Console Logs for Login
-		    		  System.out.println("Console: - LoginServlet.java | Stage 5 - Authenticated: " + "Logged In");
-		    		  System.out.println("Console: - LoginServlet.java | Stage 6 - Call Materias with doGet: ");
-		    		  
-		    		  //Session Startup
-		    		  session =(HttpSession) request.getSession(true);
-		    		  session.setAttribute("actualUser", user);
-		    		  
-		    		  alertClass 	= "alert alert-success visible";
-		        	  alertMsg 		= "Login Exitoso.";
-		        	  
-		        	  // User actualUser =(User)session.getAttribute("user");
-		        	  
-		        	// Testing Login Confirmation
-		      		request.setAttribute("alertClass", alertClass);
-		      		request.setAttribute("alertMsg", alertMsg);
-		      		request.setAttribute("attempt", attempts2);
-
-		      		// Loading Login success
-		      		doGet(request,response);
-		    	  }else {
-		    		  // Console Logs for Login
-		    		  System.out.println("Console: - LoginServlet.java | Stage 5 - Not Authenticated: Wrong Password");
-
-		    		  alertClass 	= "alert alert-danger visible";
-		        	  alertMsg 		= "Usuario y/o Contrase�a incorrecta.";
-
-		    	  }
-		      }else {
-		    	  // Console Logs for Login
-		    	  System.out.println("Console: - LoginServlet.java | Stage 3 - Verification: No User Found");
-		    	  
-		      }
-		      
-		      request.setAttribute("alertClass", alertClass);
-		      request.setAttribute("alertMsg", alertMsg);
-		      request.setAttribute("attempt", attempts2);
-		      
-		      RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(redirectURL);
-		      dispatcher.forward(request, response);
 			}
 		
 	
